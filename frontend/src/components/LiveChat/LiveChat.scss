@@ -1,0 +1,33 @@
+.live__chat {
+  &-container {
+    position: fixed;
+    z-index: 10;
+    bottom: 50px;
+    right: 50px;
+  }
+  &-icon {
+    border: none;
+    border-radius: 999px;
+  }
+  &-window {
+    position: absolute;
+    top: -1000%;
+    left: -600%;
+    animation: openbox ease-in-out 0.5s;
+  }
+}
+
+@keyframes openbox {
+  0% {
+    opacity: 0;
+    transform: rotate(180deg) scale(0);
+  }
+  85% {
+    transform: rotate(380deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    opacity: 1;
+  }
+}

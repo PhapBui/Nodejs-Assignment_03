@@ -1,0 +1,17 @@
+.product__list {
+  header {
+    text-transform: uppercase;
+    padding: 20px 0;
+    .subtitle {
+      font-size: 18px;
+      color: #ddd;
+    }
+    .title {
+      font-size: 28px;
+    }
+  }
+  .products {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

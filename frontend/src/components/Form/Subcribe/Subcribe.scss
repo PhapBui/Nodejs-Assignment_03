@@ -1,0 +1,24 @@
+.subcribe {
+  padding: 40px 0;
+  align-items: center;
+  .left {
+    p {
+      color: #8f8f8f;
+    }
+  }
+  .right {
+    display: flex;
+    input {
+      border: 1px solid #a0a0a0;
+      padding: 16px;
+      outline: none;
+      flex-grow: 1;
+    }
+    button {
+      padding: 16px;
+      background-color: #383838;
+      color: var(--text-white);
+      border: 1px solid #383838;
+    }
+  }
+}

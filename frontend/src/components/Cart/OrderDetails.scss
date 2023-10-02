@@ -1,0 +1,35 @@
+.order-detail {
+  padding: 30px;
+  background: #f6f9f6;
+  h3 {
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+  .item-list {
+    padding: 0;
+    .item {
+      padding: 5px 0;
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+      column-gap: 10px;
+      .item-name {
+        font-weight: 500;
+      }
+      span.price-qty {
+        color: #aaa;
+        text-align: right;
+      }
+    }
+  }
+  .total-bill {
+    display: flex;
+    justify-content: space-between;
+    .label {
+      text-transform: uppercase;
+    }
+    .value {
+      color: #333;
+    }
+  }
+}

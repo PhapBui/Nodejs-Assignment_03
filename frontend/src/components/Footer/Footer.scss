@@ -1,0 +1,24 @@
+.footer {
+  font-weight: 400;
+  color: var(--text-white);
+  background-color: var(--bg-black);
+  padding: 50px 0;
+
+  .footer__items {
+    display: flex;
+    flex-direction: column;
+
+    .footer__title {
+      padding: 20px 0;
+      text-transform: uppercase;
+      font-size: 20px;
+    }
+    .footer__item {
+      color: var(--text-white);
+    }
+  }
+
+  .active {
+    color: #ebc575;
+  }
+}

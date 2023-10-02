@@ -1,0 +1,28 @@
+.user-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 25px 20px;
+  background-color: var(--bg-banner);
+  margin-bottom: 20px;
+  .action a {
+    display: flex;
+    align-items: center;
+  }
+  .continue-shopping {
+    span {
+      margin-left: 8px;
+    }
+  }
+
+  .proceed-checkout {
+    padding: 6px 10px;
+    border: 1px solid var(--text-color);
+    span {
+      margin-right: 8px;
+    }
+  }
+  a {
+    color: var(--text-color);
+  }
+}

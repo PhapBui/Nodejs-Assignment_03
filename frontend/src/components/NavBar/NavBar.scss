@@ -1,0 +1,38 @@
+.header {
+  font-weight: 400;
+  padding: 15px 0;
+  .row {
+    align-items: center;
+  }
+
+  .header__left {
+    .header__item {
+      padding-right: 12px;
+    }
+  }
+
+  .header__center {
+    text-align: center;
+    .logo {
+      text-transform: uppercase;
+      font-size: 24px;
+    }
+  }
+
+  .header__right {
+    margin-right: 0;
+    text-align: right;
+    .header__item {
+      padding-right: 12px;
+      display: inline-flex;
+      align-items: center;
+      column-gap: 4px;
+    }
+  }
+  .header__item {
+    color: var(--text-color);
+  }
+  .active {
+    color: #ebc575;
+  }
+}

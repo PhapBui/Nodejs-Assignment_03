@@ -1,0 +1,16 @@
+.product {
+  transition: all linear 0.3s;
+  text-align: center;
+  &.card {
+    border: none;
+  }
+  &:hover {
+    opacity: 0.75;
+  }
+  .product__price {
+    color: #cbcbcb;
+  }
+  .product__name {
+    font-size: 18px;
+  }
+}

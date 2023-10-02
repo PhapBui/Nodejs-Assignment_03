@@ -1,0 +1,48 @@
+.form__register {
+  width: 50%;
+  margin: auto !important;
+  justify-content: center;
+  background-color: white;
+  position: relative;
+  top: 60px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 1px 1px 10px 3px #ccc;
+  border-radius: 4px;
+  color: #aaa;
+  .page-title {
+    padding: 20px 0 40px;
+    font-weight: 400;
+  }
+  .form-control,
+  button {
+    padding: 20px 12px;
+    border-radius: 2px;
+  }
+  .form-control {
+    outline: none;
+    &:focus {
+      border-color: unset;
+      box-shadow: none;
+    }
+  }
+  button {
+    display: inline-block;
+
+    width: 100%;
+    background-color: #494949;
+    border-color: #494949;
+    margin: 20px 0 40px;
+    color: white;
+  }
+  a {
+    display: inline-block;
+    padding: 10px 0 20px;
+    span {
+      &:first-of-type {
+        color: #ccc;
+      }
+      padding-right: 8px;
+    }
+  }
+}
