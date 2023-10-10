@@ -2,16 +2,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { memo } from "react";
 
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
 import * as yup from "yup";
 
-import { selectCurrentUser } from "../../../features/auth/authSlice.js";
 import { phoneRegExp } from "../../../util/regExp.js";
 import "./FormCheckout.scss";
 
-function FormCheckout() {
-  const currentUser = useSelector(selectCurrentUser);
-
+function FormCheckout({ currentUser, handlerSubmit }) {
   const schema = yup.object().shape({
     fullName: yup
       .string()
@@ -21,7 +17,7 @@ function FormCheckout() {
       .string()
       .email("Must be a valid email")
       .required("Please enter your email"),
-    phone: yup
+    phonenumber: yup
       .string()
       .matches(phoneRegExp, "Phone number is not valid")
       .min(3, "Please")
@@ -43,7 +39,7 @@ function FormCheckout() {
   });
 
   const handleLoginSubmit = (data) => {
-    console.log(data);
+    handlerSubmit(data);
   };
   return (
     <form onSubmit={handleSubmit(handleLoginSubmit)} className="form__checkout">
@@ -77,7 +73,7 @@ function FormCheckout() {
           type="text"
           autoComplete="username"
           id="phonenumber"
-          {...register("phone")}
+          {...register("phonenumber")}
         />
         {errors.password && <p>{errors.password.message}</p>}
       </label>

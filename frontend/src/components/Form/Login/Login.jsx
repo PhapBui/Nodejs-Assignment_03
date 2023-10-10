@@ -18,7 +18,7 @@ const SignupSchema = yup.object().shape({
     .email("Please enter a valid email"),
 });
 
-function FormLogin({ handlerFormSubmit }) {
+function FormLogin({ handlerFormSubmit, loading }) {
   // init react-hook-form
   const {
     register,
@@ -60,7 +60,7 @@ function FormLogin({ handlerFormSubmit }) {
         {errors.password && <p>{errors.password.message}</p>}
       </div>
 
-      <button type="submit">Sign In</button>
+      <button type="submit">{loading ? "Logging in..." : "Sign In"}</button>
       <Link to="/register">
         <span>Create an account?</span>
         <span>Sign up</span>

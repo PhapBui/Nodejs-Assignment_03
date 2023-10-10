@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const Order = new Schema({
-  products: [
+  items: [
     {
       productId: {
         type: Schema.Types.ObjectId,
@@ -23,8 +23,28 @@ const Order = new Schema({
   },
   status: {
     type: String,
-    enum: ["Ordered", "Shipping", "Completed"],
-    default: "Ordered",
+    enum: [
+      "New",
+      "Payment Received",
+      "Payment Failed",
+      "Completed",
+      "Closed",
+      "Cancelled",
+    ],
+    default: "New",
+  },
+  delivery: {
+    type: String,
+    enum: ["Pending", "Completed", "Shipping", "Cancelled"],
+    default: "Pending",
+  },
+  deliveryAddress: {
+    type: String,
+    required: true,
+  },
+  phonenumber: {
+    type: String,
+    required: true,
   },
 });
 

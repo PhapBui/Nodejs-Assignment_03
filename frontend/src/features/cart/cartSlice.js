@@ -77,6 +77,11 @@ export const selectCartToSave = createSelector(selectCartItems, (itemList) =>
   itemList?.map((item) => ({ productId: item._id, quantity: item.quantity }))
 );
 
+export const selectCountItemsInCart = createSelector(
+  selectCartItems,
+  (itemList) => itemList?.reduce((a, b) => a + b.quantity, 0)
+);
+
 const cartReducer = cartSlice.reducer;
 
 export default cartReducer;

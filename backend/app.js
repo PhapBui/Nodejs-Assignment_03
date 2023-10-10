@@ -13,6 +13,7 @@ const AuthRouter = require("./routes/AuthRoute");
 const ProductRouter = require("./routes/ProductRoute");
 const CategoryRouter = require("./routes/CategoryRoute");
 const CartRouter = require("./routes/CartRoute");
+const OrderRouter = require("./routes/OrderRoute");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,7 +25,14 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api", AuthRouter, ProductRouter, CategoryRouter, CartRouter);
+app.use(
+  "/api",
+  AuthRouter,
+  ProductRouter,
+  CategoryRouter,
+  CartRouter,
+  OrderRouter
+);
 // app.use("/api", AuthRouter);
 // app.use("/api", ProductRouter);
 // app.use("/api", CategoryRouter);
