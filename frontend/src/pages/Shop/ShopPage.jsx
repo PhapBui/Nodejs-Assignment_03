@@ -23,14 +23,12 @@ const Shop = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await productApi.getAll();
-      dispatch(productActions.getAllProduct(res));
+      dispatch(productActions.getAllProduct(res.result));
       dispatch(productActions.getProductsByCategory("all"));
     };
     fetchData();
   }, [dispatch]);
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+
   return (
     <Container as="main">
       <Banner />
@@ -60,10 +58,7 @@ const Shop = () => {
             </Col>
           </Row>
           <Row>
-            <ProductList
-              productList={getProductsByCategory}
-              col={3}
-            />
+            <ProductList productList={getProductsByCategory} col={3} />
             <div className="product-footer">
               <PaginationRoot />
               <p>Show 1-9 of 9 results</p>

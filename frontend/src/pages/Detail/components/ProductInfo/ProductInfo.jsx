@@ -11,13 +11,6 @@ import { cartActions } from "../../../../features/cart/cartSlice.js";
 const ProductInfo = ({ productData }) => {
   const dispatch = useDispatch();
 
-  const imgs = [
-    productData.img1,
-    productData.img2,
-    productData.img3,
-    productData.img4,
-  ];
-
   const handlerAddToCart = (product) => {
     dispatch(cartActions.addToCart(product));
   };
@@ -27,19 +20,12 @@ const ProductInfo = ({ productData }) => {
       <Col className="product__info-left">
         <Row>
           <Col lg={3}>
-            {imgs.map((img, i) => (
-              <img
-                key={i}
-                src={img}
-                alt={productData.name}
-              />
+            {productData.images?.map((img, i) => (
+              <img key={i} src={img} alt={productData.name} />
             ))}
           </Col>
           <Col lg={9}>
-            <img
-              src={productData.img1}
-              alt={productData.name}
-            />
+            <img src={productData.images[0]} alt={productData.name} />
           </Col>
         </Row>
       </Col>
@@ -52,10 +38,7 @@ const ProductInfo = ({ productData }) => {
           <span>{productData.category}</span>
         </div>
         <div>
-          <AddToCard
-            product={productData}
-            onSubmit={handlerAddToCart}
-          />
+          <AddToCard product={productData} onSubmit={handlerAddToCart} />
         </div>
       </Col>
     </Row>

@@ -12,8 +12,8 @@ const Relate = ({ productList }) => {
       <div className="relate-list">
         {productList.map((product) => (
           <Link
-            to={`/detail/${product._id.$oid}`}
-            key={product._id.$oid}
+            to={`/detail/${product._id}`}
+            key={product._id}
             className="relate-product"
           >
             <Product productData={product} />

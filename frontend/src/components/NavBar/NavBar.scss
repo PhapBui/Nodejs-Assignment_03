@@ -31,8 +31,25 @@
   }
   .header__item {
     color: var(--text-color);
+    position: relative;
   }
   .active {
     color: #ebc575;
+  }
+  .cart__quantity{
+    display: flex;
+    position: absolute;
+    padding: 8px;
+    font-size: 10px;
+    color: white;
+    top: -7px;
+    left: 7px;
+    background-color: rgba(51, 51, 51, 0.8);
+    border-radius: 999px;
+    line-height: 1;
+    width: 12px;
+    height: 12px;
+    align-items: center;
+    justify-content: center;
   }
 }

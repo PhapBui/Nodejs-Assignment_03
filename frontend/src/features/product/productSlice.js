@@ -1,29 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import productApi from "../../app/productApi.js";
-
-export const fetchProductById = createAsyncThunk(
-  "products/fetchProductList",
-  async (productId, thunkAPI) => {
-    const response = await productApi.getAll();
-
-    const productClicked = response.filter(
-      (product) => product._id.$oid === productId
-    );
-    if (productClicked.length > 0) return productClicked;
-  }
-);
-
-export const fetchRelateList = createAsyncThunk(
-  "products/fetchRelateList",
-  async (category, thunkAPI) => {
-    const response = await productApi.getAll();
-
-    const relateList = response.filter(
-      (product) => product.category === category
-    );
-    return relateList;
-  }
-);
+import { createSlice } from "@reduxjs/toolkit";
 
 const initState = {
   productList: [],
@@ -45,14 +20,23 @@ export const productSlice = createSlice({
     getAllProduct: (state, action) => {
       state.productList = action.payload;
     },
+
     getProductDetail: (state, action) => {
       const { productList } = state;
 
-      const productClicked = productList.filter(
-        (product) => product._id.$oid === action.payload
+      const productClicked = productList.find(
+        (product) => product._id === action.payload
       );
       state.product = productClicked;
     },
+
+    fetchProductById(state, action) {
+      state.product = action.payload;
+    },
+    fetchRelatedProduct(state, action) {
+      state.relateList = action.payload;
+    },
+
     showProductDetailPopup: (state, action) => {
       state.isShowDetailPopup = true;
     },
@@ -72,14 +56,6 @@ export const productSlice = createSlice({
       );
       state.filterProduct = filterProduct;
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(fetchProductById.fulfilled, (state, action) => {
-      if (action.payload) state.getProductById = action.payload[0];
-    });
-    builder.addCase(fetchRelateList.fulfilled, (state, action) => {
-      state.relateList = action.payload;
-    });
   },
 });
 

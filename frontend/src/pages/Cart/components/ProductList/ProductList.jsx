@@ -53,12 +53,7 @@ const ProductList = ({ productList }) => {
 
   return (
     <Row>
-      <Table
-        striped
-        bordered
-        hover
-        size="sm"
-      >
+      <Table striped bordered hover size="sm">
         <thead className="cart-header">
           <tr>
             <th>Image</th>
@@ -72,12 +67,9 @@ const ProductList = ({ productList }) => {
         <tbody>
           {productList && productList.length > 0 ? (
             productList.map((product) => (
-              <tr key={product._id.$oid}>
+              <tr key={product._id}>
                 <td>
-                  <img
-                    src={product.img1}
-                    alt={product.name}
-                  />
+                  <img src={product.images[0]} alt={product.name} />
                 </td>
                 <td>{product.name} </td>
                 <td>{currency(product.price)} </td>

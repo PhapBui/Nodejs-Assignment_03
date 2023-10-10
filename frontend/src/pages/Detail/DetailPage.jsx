@@ -3,37 +3,51 @@ import Container from "react-bootstrap/esm/Container.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
-  fetchProductById,
-  fetchRelateList,
+  getRelateList,
+  productActions,
 } from "../../features/product/productSlice.js";
 import Description from "./components/Description/Description.jsx";
 import ProductInfo from "./components/ProductInfo/ProductInfo.jsx";
 import Relate from "./components/Relate/Relate.jsx";
 import { isObjectEmpty } from "../../util/checkObjectEmpty.js";
+import productApi from "../../app/productApi.js";
 
 const Detail = () => {
   const dispatch = useDispatch();
-  const product = useSelector((state) => state.products.getProductById);
-  const relateList = useSelector((state) => state.products.relateList);
+  const product = useSelector((state) => state.products.product);
+  const relateList = useSelector(getRelateList);
 
   const { productId } = useParams();
 
   const { category } = product;
 
   useEffect(() => {
-    dispatch(fetchProductById(productId));
+    if (!productId) return;
+    const getProductById = async () => {
+      try {
+        const res = await productApi.getById(productId);
+        dispatch(productActions.fetchProductById(res.result));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProductById();
   }, [dispatch, productId]);
 
   useEffect(() => {
-    if (category) {
-      dispatch(fetchRelateList(category));
-    }
+    if (!category) return;
+    const getProductById = async () => {
+      try {
+        const res = await productApi.getByCategory(category);
+
+        dispatch(productActions.fetchRelatedProduct(res.result));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProductById();
   }, [dispatch, category]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  console.log(product);
   return (
     <Container as="main">
       {!isObjectEmpty(product) ? (

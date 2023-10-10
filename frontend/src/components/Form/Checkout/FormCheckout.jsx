@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import * as yup from "yup";
 
-import { selectCurrentUser } from "../../../features/auth/loginSlice.js";
+import { selectCurrentUser } from "../../../features/auth/authSlice.js";
 import { phoneRegExp } from "../../../util/regExp.js";
 import "./FormCheckout.scss";
 
@@ -46,10 +46,7 @@ function FormCheckout() {
     console.log(data);
   };
   return (
-    <form
-      onSubmit={handleSubmit(handleLoginSubmit)}
-      className="form__checkout"
-    >
+    <form onSubmit={handleSubmit(handleLoginSubmit)} className="form__checkout">
       <label htmlFor="fullname">
         <span>Full Name:</span>
         <input

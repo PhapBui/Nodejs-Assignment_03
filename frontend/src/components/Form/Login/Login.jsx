@@ -1,16 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as yup from "yup";
 
-import { useDispatch, useSelector } from "react-redux";
-
-import {
-  authActions,
-  selectIsLoggedIn,
-  selectUserList,
-} from "../../../features/auth/loginSlice.js";
 import "./Login.scss";
 
 const SignupSchema = yup.object().shape({
@@ -25,7 +18,7 @@ const SignupSchema = yup.object().shape({
     .email("Please enter a valid email"),
 });
 
-function FormLogin() {
+function FormLogin({ handlerFormSubmit }) {
   // init react-hook-form
   const {
     register,
@@ -39,43 +32,14 @@ function FormLogin() {
     resolver: yupResolver(SignupSchema),
   });
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const userArray = useSelector(selectUserList);
-
-  // Navigate when user login
-  useEffect(() => {
-    if (isLoggedIn) navigate("/");
-  }, [navigate, isLoggedIn]);
-
-  //check a product in your shopping cart.
-  const checkAnUserIsExist = (userArr, email) => {
-    if (!userArr) return;
-    return userArr.find((p) => p.email === email);
-  };
-  // Get user list from localstorage
-
+  //send data from form to login page
   const onSubmit = (data) => {
-    const currentUser = checkAnUserIsExist(userArray, data.email);
-    if (currentUser) {
-      if (currentUser.password === data.password) {
-        dispatch(authActions.login(currentUser));
-      } else {
-        alert("incorrect password");
-      }
-    } else {
-      alert("Your email is invalid");
-    }
+    handlerFormSubmit(data);
   };
-  return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="form__login"
-    >
-      <h1 className="page-title">Sign In</h1>
 
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="form__login">
+      <h1 className="page-title">Sign In</h1>
       <div>
         <input
           placeholder="Email"

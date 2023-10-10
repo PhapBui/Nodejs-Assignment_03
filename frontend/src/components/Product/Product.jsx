@@ -8,14 +8,8 @@ const Product = ({ productData, handlerProductDetail }) => {
     if (handlerProductDetail) handlerProductDetail(productData._id.$oid);
   };
   return (
-    <Card
-      className="product"
-      onClick={handleClick}
-    >
-      <Card.Img
-        variant="top"
-        src={productData.img1}
-      />
+    <Card className="product" onClick={handleClick}>
+      <Card.Img variant="top" src={productData.images[0]} />
       <Card.Body>
         <Card.Title className="product__name">{productData.name}</Card.Title>
         <Card.Text className="product__price">

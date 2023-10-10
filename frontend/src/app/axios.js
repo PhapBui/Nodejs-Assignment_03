@@ -1,18 +1,22 @@
 import axios from "axios";
+import store from "./store";
 
-const products = axios.create({
-  baseURL:
-    "https://firebasestorage.googleapis.com/v0/b/funix-subtitle.appspot.com/o/Boutique_products.json?alt=media&token=dc67a5ea-e3e0-479e-9eaf-5e01bcd09c74",
-  timeout: 1000,
+const clientAxios = axios.create({
+  baseURL: process.env.REACT_APP_BACKEND_URL,
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json",
   },
 });
 // Add a request interceptor
-products.interceptors.request.use(
+clientAxios.interceptors.request.use(
   async function (config) {
     // Do something before request is sent
-
+    const state = store.getState();
+    const token = state.auth.token;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   function (error) {
@@ -22,7 +26,7 @@ products.interceptors.request.use(
 );
 
 // Add a response interceptor
-products.interceptors.response.use(
+clientAxios.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
@@ -34,4 +38,4 @@ products.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-export default products;
+export default clientAxios;

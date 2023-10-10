@@ -17,26 +17,16 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await productApi.getAll();
-      dispatch(productActions.getAllProduct(res.slice(0, 8)));
+
+      dispatch(productActions.getAllProduct(res.result));
     };
     fetchData();
   }, [dispatch]);
-
-  // auto scroll top after page loaded
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <Container as="main">
       <Banner />
       <Category />
-      <ProductList
-        productList={products}
-        col={4}
-        title={true}
-        modal={true}
-      />
+      <ProductList productList={products} col={4} title={true} modal={true} />
       <Service />
       <Subcribe />
     </Container>

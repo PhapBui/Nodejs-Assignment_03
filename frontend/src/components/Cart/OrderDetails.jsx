@@ -13,10 +13,7 @@ const OrderDetails = ({ itemList }) => {
       <ul className="item-list">
         {itemList &&
           itemList.map((item) => (
-            <li
-              key={item._id.$oid}
-              className="item"
-            >
+            <li key={item._id} className="item">
               <span className="item-name">{item.name}</span>
               <span className="price-qty">
                 {currency(item.price)}x{item.quantity}

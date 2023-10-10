@@ -1,5 +1,11 @@
+import { HeaderWrapper, PageLogo } from "./HeaderStyled";
+
 const Header = () => {
-  return <div>Header</div>;
+  return (
+    <HeaderWrapper>
+      <PageLogo>Header</PageLogo>
+    </HeaderWrapper>
+  );
 };
 
 export default Header;

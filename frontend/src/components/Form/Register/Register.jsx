@@ -7,7 +7,7 @@ import * as yup from "yup";
 import {
   authActions,
   selectUserList,
-} from "../../../features/auth/loginSlice.js";
+} from "../../../features/auth/authSlice.js";
 
 import { phoneRegExp } from "../../../util/regExp.js";
 import "./Register.scss";
@@ -95,10 +95,7 @@ function FormRegister() {
     }
   };
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="form__register"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="form__register">
       <h1 className="page-title">Sign Up</h1>
       <div>
         <input

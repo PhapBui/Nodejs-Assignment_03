@@ -21,6 +21,11 @@ const Order = new Schema({
     ref: "User",
     required: true,
   },
+  status: {
+    type: String,
+    enum: ["Ordered", "Shipping", "Completed"],
+    default: "Ordered",
+  },
 });
 
 module.exports = mongoose.model("Order", Order);

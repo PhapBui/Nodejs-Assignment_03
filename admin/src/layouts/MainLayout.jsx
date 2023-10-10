@@ -1,14 +1,19 @@
 import { Outlet } from "react-router-dom";
-import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
-import { Wrapper } from "./MainLayoutStyled";
+import Sidebar from "../components/sidebar/Sidebar";
+import { MainBody, Wrapper } from "./MainLayoutStyled";
+import PageContentWrapper from "../components/UI/PageContentWrapper";
 
 const MainLayout = () => {
   return (
     <Wrapper>
       <Header />
-      <Outlet />
-      <Footer />
+      <MainBody component="main">
+        <Sidebar />
+        <PageContentWrapper>
+          <Outlet />
+        </PageContentWrapper>
+      </MainBody>
     </Wrapper>
   );
 };

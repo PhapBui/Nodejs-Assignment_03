@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 const ProductList = ({ productList, col, title = false, modal = false }) => {
   const dispatch = useDispatch();
 
-  const product = useSelector((state) => state.products.product[0]);
+  const product = useSelector((state) => state.products.product);
   const isShow = useSelector(isShowDetailPopup);
 
   const handlerProductDetail = (productId) => {
@@ -40,26 +40,20 @@ const ProductList = ({ productList, col, title = false, modal = false }) => {
         {productList &&
           productList.map((product) =>
             modal ? (
-              <div
-                style={{ width: 100 / col + "%" }}
-                key={product._id.$oid}
-              >
+              <div style={{ width: 100 / col + "%" }} key={product._id}>
                 <Product
                   productData={product}
-                  handlerProductDetail={handlerProductDetail}
+                  handlerProductDetail={() => handlerProductDetail(product._id)}
                   col={col}
                 />
               </div>
             ) : (
               <Link
-                key={product._id.$oid}
-                to={`/detail/${product._id.$oid}`}
+                key={product._id}
+                to={`/detail/${product._id}`}
                 style={{ width: 100 / col + "%" }}
               >
-                <Product
-                  productData={product}
-                  col={col}
-                />
+                <Product productData={product} col={col} />
               </Link>
             )
           )}

@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getFromStorage, saveToStorage } from "../../util/localStorage.js";
 
 // Get userList, login status, current user from localstorage
-const userArray = getFromStorage("userArr", []);
 const isLoggedIn = getFromStorage("isLoggedIn", false);
-const currentUser = getFromStorage("currentUser", false);
+const currentUser = getFromStorage("currentUser", {});
+
+const token = getFromStorage("token", false);
 
 const initialState = {
-  userArr: userArray,
-
+  token: token,
   isLoggedIn: isLoggedIn,
   currentUser: currentUser,
   error: {},
@@ -27,19 +27,28 @@ const authSlice = createSlice({
     },
     // Save login status and current user to localstorage when login
     login: (state, action) => {
-      state.currentUser = action.payload;
+      state.currentUser = action.payload.user;
       state.isLoggedIn = true;
+      state.token = action.payload.token;
 
       saveToStorage("isLoggedIn", state.isLoggedIn);
       saveToStorage("currentUser", state.currentUser);
+      saveToStorage("token", state.token);
+      // const remainingMilliseconds = 24 * 60 * 60 * 1000;
+      const remainingMilliseconds = 30 * 1000;
+      const expiryDate = new Date(new Date().getTime() + remainingMilliseconds);
+      saveToStorage("timeExpired", expiryDate);
     },
     // Save login status and current user to localstorage when logout
     logout: (state) => {
       state.isLoggedIn = false;
       state.currentUser = {};
+      state.token = null;
 
       saveToStorage("isLoggedIn", state.isLoggedIn);
       saveToStorage("currentUser", state.currentUser);
+      saveToStorage("token", state.token);
+      saveToStorage("timeExpired", 0);
     },
   },
 });

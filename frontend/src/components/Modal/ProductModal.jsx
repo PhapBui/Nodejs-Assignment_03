@@ -17,10 +17,7 @@ const ProductModal = ({ product }) => {
   return (
     <Row className="modal-inner">
       <Col>
-        <img
-          src={product.img1}
-          alt={product.name}
-        />
+        <img src={product.images[0]} alt={product.name} />
       </Col>
       <Col>
         <div className="product-detail">
@@ -32,7 +29,7 @@ const ProductModal = ({ product }) => {
           <Link
             style={{ color: "inherit" }}
             onClick={handlerNavigate}
-            to={`/detail/${product._id.$oid}`}
+            to={`/detail/${product._id}`}
           >
             View Detail
           </Link>

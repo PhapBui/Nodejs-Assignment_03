@@ -17,7 +17,6 @@ const UserSchema = new Schema({
   },
   phone: {
     type: String,
-    required: true,
   },
   address: {
     type: String,
@@ -26,7 +25,6 @@ const UserSchema = new Schema({
     type: String,
     enum: ["Customer", "Sale", "Admin"],
     default: "Customer",
-    required: true,
   },
 });
 

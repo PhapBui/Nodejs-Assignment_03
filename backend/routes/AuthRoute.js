@@ -1,7 +1,22 @@
 const express = require("express");
 
+const AuthController = require("../controllers/AuthController");
+
+const isAuth = require("../middlewares/is-auth");
+
+const {
+  userSignupSchema,
+  userLoginSchema,
+} = require("../schema-validations/user");
+
 const router = express.Router();
 
-router.get("/login");
+// login
+router.post("/login", userLoginSchema, AuthController.login);
+
+// signup
+router.post("/signup", userSignupSchema, AuthController.signup);
+
+router.put("/cart", isAuth, AuthController.addToCart);
 
 module.exports = router;

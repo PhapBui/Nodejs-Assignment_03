@@ -11,15 +11,15 @@ const Cates = [
     items: [
       {
         name: "Iphone",
-        value: "iphone",
+        value: "iPhone",
       },
       {
         name: "Ipad",
-        value: "ipad",
+        value: "iPad",
       },
       {
         name: "Macbook",
-        value: "iphone-mac",
+        value: "Macbook",
       },
     ],
   },
@@ -28,15 +28,15 @@ const Cates = [
     items: [
       {
         name: "Mouse",
-        value: "mouse",
+        value: "Mouse",
       },
       {
         name: "Keyboard",
-        value: "keyboard",
+        value: "Keyboard",
       },
       {
         name: "Other",
-        value: "other",
+        value: "Other",
       },
     ],
   },
@@ -44,12 +44,12 @@ const Cates = [
     title: "Wireless",
     items: [
       {
-        name: "Airpob",
-        value: "airpob",
+        name: "Air Pods",
+        value: "Air Pods",
       },
       {
         name: "Watch",
-        value: "watch",
+        value: "Watch",
       },
     ],
   },
