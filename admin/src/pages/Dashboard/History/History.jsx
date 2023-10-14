@@ -8,22 +8,14 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import { useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
-
-function createData(id, name, phone, address, total, delivery, status) {
-  return { id, name, phone, address, total, delivery, status };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0, "Pending", "Ordered"),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3, "Pending", "Ordered"),
-  createData("Eclair", 262, 16.0, 24, 6.0, "Pending", "Ordered"),
-  createData("Cupcake", 305, 3.7, 67, 4.3, "Pending", "Ordered"),
-  createData("Gingerbread", 356, 16.0, 49, 3.9, "Pending", "Ordered"),
-];
+import { selectOrderList } from "../../../redux/order/orderSlice";
+import { currency } from "../../../utils/currency";
 
 const History = () => {
+  const orders = useSelector(selectOrderList);
   return (
     <TableContainer component={Paper} sx={{ my: 2 }}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -40,24 +32,24 @@ const History = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {orders.map((order) => (
             <TableRow
-              key={row.id}
+              key={order._id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.id}
+                {order.userId._id}
               </TableCell>
-              <TableCell align="center">{row.name}</TableCell>
-              <TableCell align="center">{row.phone}</TableCell>
-              <TableCell align="center">{row.address}</TableCell>
-              <TableCell align="center">{row.total}</TableCell>
-              <TableCell align="center">{row.delivery}</TableCell>
-              <TableCell align="center">{row.status}</TableCell>
+              <TableCell align="center">{order.userId.fullName}</TableCell>
+              <TableCell align="center">{order.phonenumber}</TableCell>
+              <TableCell align="center">{order.deliveryAddress}</TableCell>
+              <TableCell align="center">{currency(order.total)}</TableCell>
+              <TableCell align="center">{order.delivery}</TableCell>
+              <TableCell align="center">{order.status}</TableCell>
               <TableCell align="center">
                 <Button variant="contained" color="success">
                   <Link
-                    to={`/order/detail/${row.id}`}
+                    to={`/order/detail/${order._id}`}
                     style={{ color: "#fff" }}
                   >
                     View

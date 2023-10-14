@@ -20,6 +20,10 @@ const CartSchema = new Schema({
       },
     },
   ],
+  subTotal: {
+    type: Number,
+    required: true,
+  },
 });
 
 CartSchema.methods.addToCart = function (product) {

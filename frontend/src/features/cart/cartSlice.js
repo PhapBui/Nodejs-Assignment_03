@@ -12,7 +12,7 @@ const indexProduct = (productList, action) => {
 };
 
 // Initial cart state
-const initState = { listItem: [], subTotal: 0 };
+const initState = { listItem: [] };
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -40,7 +40,6 @@ export const cartSlice = createSlice({
 
     // update item add to cart
     updateItemQty: (state, action) => {
-      console.log(state.listItem);
       const objIndex = indexProduct(state.listItem, action);
       state.listItem[objIndex].quantity = +action.payload.quantity;
     },
@@ -51,17 +50,6 @@ export const cartSlice = createSlice({
     // remove all items in cart
     emptyCart: (state) => {
       state.listItem = [];
-      console.log("Done!!!!");
-    },
-    // total bill
-    calculatorSubTotal: (state) => {
-      const currentSubTotal = state.subTotal;
-      const { listItem } = state;
-      const price = listItem.reduce((a, b) => {
-        a += +b.price;
-        return a;
-      }, currentSubTotal);
-      state.subTotal = price;
     },
   },
 });
@@ -71,7 +59,9 @@ export const cartActions = cartSlice.actions;
 
 // Selector
 export const selectCartItems = (state) => state.cart.listItem;
-export const selectCartSubTotal = (state) => state.cart.subTotal;
+export const selectCartSubTotal = createSelector(selectCartItems, (itemList) =>
+  itemList.reduce((total, item) => total + item.price * item.quantity, 0)
+);
 
 export const selectCartToSave = createSelector(selectCartItems, (itemList) =>
   itemList?.map((item) => ({ productId: item._id, quantity: item.quantity }))

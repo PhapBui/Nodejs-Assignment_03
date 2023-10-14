@@ -3,11 +3,15 @@ import createSagaMiddleware from "redux-saga";
 import rootSaga from "./rootSaga";
 import productReducer from "../redux/product/productSlice";
 import authReducer from "../redux/auth/authSlice";
+import orderReducer from "../redux/order/orderSlice";
+import categoryReducer from "../redux/category/categorySlice";
 // ...
 
 const rootReducer = combineReducers({
   product: productReducer,
   auth: authReducer,
+  order: orderReducer,
+  category: categoryReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();
@@ -18,10 +22,8 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredPaths: [
-          "transaction.resTransaction.dateStart",
-          "transaction.resTransaction.dateEnd",
-        ],
+        ignoredPaths: [],
+        ignoredActions: ["product/createNewProductStart"],
       },
     }).concat(sagaMiddleware),
 });

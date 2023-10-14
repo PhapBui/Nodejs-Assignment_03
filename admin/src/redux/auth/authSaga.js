@@ -20,6 +20,18 @@ function* login(action) {
   }
 }
 
+function* statistic() {
+  try {
+    const res = yield call(authApi.getStatistic);
+    if (res.status === 0) throw new Error(res.message);
+    yield put(authActions.fetchStatisticSuccess(res.result));
+  } catch (error) {
+    yield put(authActions.fetchStatisticFailed());
+    console.log(error);
+  }
+}
+
 export default function* authSaga() {
   yield takeLatest(authActions.loginStart, login);
+  yield takeLatest(authActions.fetchAllUserStart, statistic);
 }

@@ -2,6 +2,8 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
+const Order = require("../models/Order");
+const { currency } = require("../utils/totalBill");
 
 const login = async (req, res, next) => {
   try {
@@ -32,6 +34,7 @@ const login = async (req, res, next) => {
       {
         email: loadedUser.email,
         userId: loadedUser._id.toString(),
+        userRole: loadedUser.role,
       },
       "apploadertoken",
       { expiresIn: "24h" }
@@ -73,33 +76,35 @@ const signup = async (req, res, next) => {
   }
 };
 
-const addToCart = async (req, res, next) => {
+const statistic = async (req, res, next) => {
   try {
-    const { userId } = req;
-    const { cart } = req.body;
-    const currentUser = await User.findById(userId);
-    if (!currentUser) {
-      return res
-        .status(404)
-        .json({ status: 0, message: "Can not find user", result: [] });
-    }
-    currentUser.cart = cart;
-
-    const userSaved = await currentUser.save();
-
+    const countUser = await User.find().count();
+    const countNewOrder = await Order.aggregate([
+      {
+        $group: {
+          _id: null,
+          total: { $sum: { $add: ["$total"] } },
+          count: { $sum: 1 },
+        },
+      },
+    ]);
     res.status(200).json({
       status: 1,
-      message: "Add to cart successfully",
-      result: userSaved,
+      message: "Fetch statistic successfully",
+      result: {
+        countUser,
+        total: currency(countNewOrder[0].total),
+        countOrder: countNewOrder[0].count,
+      },
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Server Internal Error" });
+    res.status(500).json({ message: "Server error" });
   }
 };
 
 module.exports = {
   login,
   signup,
-  addToCart,
+  statistic,
 };

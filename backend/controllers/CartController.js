@@ -24,7 +24,11 @@ const postCart = async (req, res, next) => {
     const cartDoc = await Cart.findOne({ userId }).exec();
 
     if (!cartDoc) {
-      const newCart = new Cart({ userId, items: cart });
+      const newCart = new Cart({
+        userId,
+        items: cart.items,
+        subTotal: cart.subTotal,
+      });
 
       const savedCart = await newCart.save();
 
@@ -34,7 +38,8 @@ const postCart = async (req, res, next) => {
         result: savedCart,
       });
     } else {
-      cartDoc.items = cart;
+      cartDoc.items = cart.items;
+      cartDoc.subTotal = cart.subTotal;
       const savedCart = await cartDoc.save();
       res.status(201).json({
         status: 1,

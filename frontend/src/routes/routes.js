@@ -9,6 +9,9 @@ import RegisterPage from "../pages/Auth/RegisterPage.jsx";
 import AuthLayout from "../components/Layouts/AuthLayout.jsx";
 import Detail from "../pages/Detail/DetailPage.jsx";
 import ErrorPage from "../pages/Error.js";
+import LogoutPage from "../pages/Auth/LogoutPage.jsx";
+import OrdersPage from "../pages/Order/OrdersPage.jsx";
+import OrderDetail from "../pages/Order/OrderDetail.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,22 +39,35 @@ const router = createBrowserRouter([
         path: "detail/:productId",
         element: <Detail />,
       },
+      {
+        element: <AuthLayout />,
+        path: "auth",
+        children: [
+          {
+            path: "login",
+            element: <LoginPage />,
+          },
+          {
+            path: "register",
+            element: <RegisterPage />,
+          },
+          {
+            path: "logout",
+            element: <LogoutPage />,
+          },
+          {
+            path: "orders",
+            element: <OrdersPage />,
+          },
+          {
+            path: "orders/:orderId",
+            element: <OrderDetail />,
+          },
+        ],
+      },
     ],
   },
-  {
-    element: <AuthLayout />,
 
-    children: [
-      {
-        path: "login",
-        element: <LoginPage />,
-      },
-      {
-        path: "register",
-        element: <RegisterPage />,
-      },
-    ],
-  },
   {
     path: "*",
     element: <ErrorPage />,

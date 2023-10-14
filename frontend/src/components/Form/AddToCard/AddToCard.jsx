@@ -5,6 +5,7 @@ import "./AddToCard.scss";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../../features/auth/authSlice";
+import { toast } from "react-toastify";
 
 const AddToCard = ({ product, onSubmit }) => {
   const [quantity, setQuantity] = useState(1);
@@ -37,6 +38,8 @@ const AddToCard = ({ product, onSubmit }) => {
     e.preventDefault();
 
     if (!isLoggedIn) {
+      toast.warn("You need login");
+
       return navigate("/login");
     }
 
@@ -45,6 +48,7 @@ const AddToCard = ({ product, onSubmit }) => {
       quantity,
     };
     onSubmit(newProduct);
+    toast.success("Success");
     setQuantity(1);
   };
 

@@ -1,8 +1,8 @@
 import clientAxios from "./axios.js";
 
 const orderApi = {
-  getCart() {
-    const url = `/cart`;
+  getAllCurrentOrder() {
+    const url = `/order`;
     return clientAxios.get(url);
   },
   completeOrder(userInfo) {

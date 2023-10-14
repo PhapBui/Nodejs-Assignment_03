@@ -46,10 +46,7 @@ const Footer = () => {
       <Container>
         <Row>
           {fakeData.map((data) => (
-            <Col
-              className="footer__items"
-              key={data.order}
-            >
+            <Col className="footer__items" key={data.order}>
               <Card.Title className="footer__title">{data.title}</Card.Title>
 
               {data.items.map((item) => (
@@ -69,4 +66,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default React.memo(Footer);

@@ -1,8 +1,17 @@
 import { Box, Paper, Typography } from "@mui/material";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { orderActions } from "../../redux/order/orderSlice";
 import History from "./History/History";
 import Statistic from "./Statistic/Statistic";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(orderActions.fetchAllOrderStart());
+  }, [dispatch]);
+
   return (
     <>
       <Statistic />

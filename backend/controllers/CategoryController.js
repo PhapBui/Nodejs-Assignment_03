@@ -16,6 +16,8 @@ const getAllCategory = async (req, res, next) => {
 const createNewCategory = async (req, res, next) => {
   try {
     const { name, thumbnail, desc } = req.body;
+    const images = req.files;
+    console.log(images);
 
     const category = new Category({ name, thumbnail, desc });
     const savedCategory = await category.save();

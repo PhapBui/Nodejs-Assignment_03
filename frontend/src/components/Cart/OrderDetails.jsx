@@ -1,11 +1,10 @@
 import React from "react";
 import { currency } from "../../util/currency.js";
 import "./OrderDetails.scss";
+import { useSelector } from "react-redux";
+import { selectCartSubTotal } from "../../features/cart/cartSlice.js";
 const OrderDetails = ({ itemList }) => {
-  const total = itemList.reduce(
-    (total, item) => total + +item.price * item.quantity,
-    0
-  );
+  const total = useSelector(selectCartSubTotal);
 
   return (
     <div className="order-detail">

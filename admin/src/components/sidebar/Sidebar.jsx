@@ -11,6 +11,16 @@ import {
 
 const sidebarViewData = [
   {
+    title: "Service",
+    items: [
+      {
+        title: "Live Chat",
+        icons: icons.chat,
+        path: "/service/chat",
+      },
+    ],
+  },
+  {
     title: "List",
     items: [
       {

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import * as yup from "yup";
 
 import "./Login.scss";
+import { Alert } from "react-bootstrap";
 
 const SignupSchema = yup.object().shape({
   password: yup
@@ -18,12 +19,12 @@ const SignupSchema = yup.object().shape({
     .email("Please enter a valid email"),
 });
 
-function FormLogin({ handlerFormSubmit, loading }) {
+function FormLogin({ handlerFormSubmit }) {
   // init react-hook-form
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitted },
   } = useForm({
     defaultValues: {
       email: "",
@@ -47,7 +48,7 @@ function FormLogin({ handlerFormSubmit, loading }) {
           className="form-control"
           {...register("email")}
         />
-        {errors.email && <p>{errors.email.message}</p>}
+        {errors.email && <Alert variant="danger">{errors.email.message}</Alert>}
       </div>
       <div>
         <input
@@ -57,11 +58,15 @@ function FormLogin({ handlerFormSubmit, loading }) {
           autoComplete="username"
           {...register("password")}
         />
-        {errors.password && <p>{errors.password.message}</p>}
+        {errors.password && (
+          <Alert variant="danger">{errors.password.message}</Alert>
+        )}
       </div>
 
-      <button type="submit">{loading ? "Logging in..." : "Sign In"}</button>
-      <Link to="/register">
+      <button type="submit" disabled={isSubmitted}>
+        {isSubmitted ? "Logging in..." : "Sign In"}
+      </button>
+      <Link to="/auth/register">
         <span>Create an account?</span>
         <span>Sign up</span>
       </Link>

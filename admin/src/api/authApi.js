@@ -9,4 +9,8 @@ export const authApi = {
     const url = "/user";
     return axiosAdmin.get(url);
   },
+  getStatistic() {
+    const url = "/statistic";
+    return axiosAdmin.get(url);
+  },
 };

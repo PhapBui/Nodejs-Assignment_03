@@ -2,10 +2,7 @@ import axios from "axios";
 import store from "../app/store";
 
 const axiosAdmin = axios.create({
-  baseURL: `CLOUD_NAME`,
-  headers: {
-    "Content-Type": "application/json",
-  },
+  baseURL: import.meta.env.VITE_BACKEND_URL,
 });
 
 // Add a request interceptor

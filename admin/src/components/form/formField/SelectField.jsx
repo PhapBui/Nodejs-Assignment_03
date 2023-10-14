@@ -41,7 +41,6 @@ export function SelectField({
           onBlur={onBlur}
           label={label}
           placeholder="Select your option"
-          defaultValue={value}
           {...selectProps}
         >
           {options.map((option) => (

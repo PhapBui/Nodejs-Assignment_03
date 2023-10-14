@@ -1,23 +1,14 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as yup from "yup";
-import {
-  authActions,
-  selectUserList,
-} from "../../../features/auth/authSlice.js";
 
 import { phoneRegExp } from "../../../util/regExp.js";
 import "./Register.scss";
+import { Alert } from "react-bootstrap";
 
-function FormRegister() {
-  const [isValidEmail, setIsValidEmail] = useState({
-    isValid: true,
-    message: "",
-  });
-
+function FormRegister({ handlerFormSubmit, errorsMsg }) {
   const SignupSchema = yup.object().shape({
     fullName: yup
       .string("Fullname must be  string")
@@ -30,69 +21,37 @@ function FormRegister() {
     email: yup
       .string()
       .required("Please enter your email")
-      .email("Please enter a valid email")
-      .when("checkEmail", {
-        is: true,
-        then: yup.string().test({
-          message: () => "Email already exists",
-          test: async (values) => {
-            console.log(values);
-          },
-        }),
-      }),
-    phone: yup
+      .email("Please enter a valid email"),
+
+    phonenumber: yup
       .string()
       .matches(phoneRegExp, "Phone number is not valid")
-      .min(3, "Please")
-      .required("Please enter your phonenumber"),
+      .min(3, "Please"),
   });
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    watch,
+    setError,
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(SignupSchema),
+    defaultValues: {
+      fullName: "",
+      password: "",
+      email: "",
+      phonenumber: "",
+    },
   });
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const email = watch("email");
-  const userArray = useSelector(selectUserList);
-
-  //check a product in your shopping cart.
-  const checkAnUserIsExist = (userArr, email) => {
-    if (!userArr) return;
-    return userArr.find((p) => p.email === email);
-  };
-
   useEffect(() => {
-    const validEmail = setTimeout(() => {
-      const isValidEmail = checkAnUserIsExist(userArray, email);
-      if (isValidEmail) {
-        setIsValidEmail((prev) => ({
-          isValid: false,
-          message: "Email already use plz try a new email",
-        }));
-      } else {
-        setIsValidEmail((prev) => ({
-          isValid: true,
-          message: "",
-        }));
-      }
-    }, 500);
-
-    return () => clearTimeout(validEmail);
-  }, [email, userArray]);
-
-  const onSubmit = (data) => {
-    if (isValidEmail.isValid) {
-      dispatch(authActions.registerNewUser(data));
-      navigate("/login");
-    } else {
+    for (let key in errorsMsg) {
+      setError(key, { type: "nodeValidate", message: errorsMsg[key] });
     }
+  }, [errorsMsg, setError]);
+
+  const onSubmit = async (data) => {
+    await handlerFormSubmit(data);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="form__register">
@@ -103,38 +62,46 @@ function FormRegister() {
           className="form-control"
           {...register("fullName")}
         />
-        {errors.fullName && <p>{errors.fullName.message}</p>}
+        {errors.fullName && (
+          <Alert variant="danger">{errors.fullName.message}</Alert>
+        )}
       </div>
       <div>
         <input
           placeholder="Email"
           className="form-control"
+          autoComplete="current-email"
           {...register("email")}
         />
-        {errors.email && <p>{errors.email.message}</p>}
-        {!isValidEmail.isValid && <p>{isValidEmail.message}</p>}
+        {errors.email && <Alert variant="danger">{errors.email.message}</Alert>}
       </div>
 
       <div>
         <input
           placeholder="Password"
           className="form-control"
+          autoComplete="current-password"
           type="password"
-          autoComplete="username"
           {...register("password")}
         />
-        {errors.password && <p>{errors.password.message}</p>}
+        {errors.password && (
+          <Alert variant="danger">{errors.password.message}</Alert>
+        )}
       </div>
       <div>
         <input
           placeholder="Phone"
           className="form-control"
-          {...register("phone")}
+          {...register("phonenumber")}
         />
-        {errors.phone && <p>{errors.phone.message}</p>}
+        {errors.phonenumber && (
+          <Alert variant="danger">{errors.phonenumber.message}</Alert>
+        )}
       </div>
-      <button type="submit">Sign Up</button>
-      <Link to="/login">
+      <button type="submit" disabled={isSubmitting}>
+        {isSubmitting ? "Registering..." : "Sign Up"}
+      </button>
+      <Link to="/auth/login">
         <span>Login?</span>
         <span>Click</span>
       </Link>

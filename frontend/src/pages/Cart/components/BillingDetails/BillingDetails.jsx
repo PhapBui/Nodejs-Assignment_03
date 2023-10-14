@@ -25,6 +25,7 @@ const BillingDetails = () => {
         toast.success(res.message);
       } else {
         toast.error(res.message);
+        throw new Error(res.message);
       }
     } catch (error) {
       console.log(error);

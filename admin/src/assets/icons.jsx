@@ -5,11 +5,12 @@ import {
   BiSolidCity,
 } from "react-icons/bi";
 import { RiHotelFill } from "react-icons/ri";
-import { FiCreditCard } from "react-icons/fi";
+import { FiCreditCard, FiDollarSign } from "react-icons/fi";
 import { IoIosOptions } from "react-icons/io";
 import { GiNotebook } from "react-icons/gi";
 import { CiMobile3 } from "react-icons/ci";
-import { AiOutlineUserAdd } from "react-icons/ai";
+import { AiOutlineUserAdd, AiOutlineWechat } from "react-icons/ai";
+import { MdOutlineNoteAdd } from "react-icons/md";
 
 export const icons = {
   dashboard: <BiSolidDashboard />,
@@ -23,4 +24,8 @@ export const icons = {
   orders: <GiNotebook />,
   product: <CiMobile3 />,
   addUser: <AiOutlineUserAdd />,
+
+  chat: <AiOutlineWechat />,
+  dollar: <FiDollarSign />,
+  order: <MdOutlineNoteAdd />,
 };

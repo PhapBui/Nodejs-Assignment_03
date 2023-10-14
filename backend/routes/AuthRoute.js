@@ -16,7 +16,6 @@ router.post("/login", userLoginSchema, AuthController.login);
 
 // signup
 router.post("/signup", userSignupSchema, AuthController.signup);
-
-router.put("/cart", isAuth, AuthController.addToCart);
+router.get("/statistic", AuthController.statistic);
 
 module.exports = router;

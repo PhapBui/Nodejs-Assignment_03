@@ -1,5 +1,7 @@
 const Product = require("../models/Product");
+const { deleteFile } = require("../utils/file");
 
+// get all product
 const getAllProducts = async (req, res, next) => {
   try {
     const { cate } = req.query;
@@ -20,21 +22,25 @@ const getAllProducts = async (req, res, next) => {
     });
   }
 };
-
+// create product
 const createNewProduct = async (req, res, next) => {
   try {
-    const { name, images, price, category, short_desc, long_desc, quantity } =
-      req.body;
+    const { name, price, category, short_desc, long_desc, quantity } = req.body;
+    const files = req.files;
+
+    // create imgs path
+    const imgUrl = files.map((img) => "http://localhost:5000/" + img.path);
 
     const product = {
       name,
-      images,
+      images: imgUrl,
       price,
       category,
       short_desc,
       long_desc,
       quantity,
     };
+
     const newProduct = new Product(product);
     const savedProduct = await newProduct.save();
     res.status(201).json({
@@ -42,6 +48,7 @@ const createNewProduct = async (req, res, next) => {
       result: savedProduct,
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: "Fetch all products failed!",
       status: 0,
@@ -49,11 +56,14 @@ const createNewProduct = async (req, res, next) => {
   }
 };
 
+// update product
 const updateProductById = async (req, res, next) => {
   try {
-    const { name, images, price, category, short_desc, long_desc, quantity } =
-      req.body;
+    const { name, price, category, short_desc, long_desc, quantity } = req.body;
 
+    const { files } = req;
+
+    console.log("Update!");
     const { productId } = req.params;
     if (!productId) {
       return res.status(422).json({
@@ -64,11 +74,26 @@ const updateProductById = async (req, res, next) => {
 
     const productDoc = await Product.findById(productId);
 
+    // check product exist
     if (!productDoc) {
       return res.status(404).json({
         message: "Product cant be found",
         status: 0,
       });
+    }
+    // set images
+    let images;
+    if (files.length <= 0) {
+      // keep if images not change
+      images = productDoc.images;
+    } else {
+      // delete image in folder
+      productDoc.images.forEach((image) => {
+        let url = image.replace("http://localhost:5000/", "");
+        deleteFile(url);
+      });
+      // great new imgs path
+      images = files.map((img) => "http://localhost:5000/" + img.path);
     }
 
     const product = {
@@ -98,6 +123,7 @@ const updateProductById = async (req, res, next) => {
   }
 };
 
+// get product by id
 const getProductById = async (req, res, next) => {
   try {
     const { productId } = req.params;
@@ -121,6 +147,36 @@ const getProductById = async (req, res, next) => {
       status: 1,
     });
   } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Fetch all products failed!",
+      status: 0,
+    });
+  }
+};
+
+// delete product by Id
+const deleteProductById = async (req, res, next) => {
+  try {
+    const { productId } = req.params;
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      res
+        .status(404)
+        .json({ message: "Product not found!", status: 0, result: [] });
+    }
+    const images = product.images;
+    images.forEach((image) => {
+      let url = image.replace("http://localhost:5000/", "");
+      deleteFile(url);
+    });
+    await Product.findByIdAndDelete(productId);
+    res
+      .status(200)
+      .json({ message: "Delete product success", status: 1, result: [] });
+  } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: "Fetch all products failed!",
       status: 0,
@@ -133,4 +189,5 @@ module.exports = {
   getProductById,
   createNewProduct,
   updateProductById,
+  deleteProductById,
 };

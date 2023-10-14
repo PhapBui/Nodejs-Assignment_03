@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import authApi from "../../app/authApi.js";
 import FormLogin from "../../components/Form/Login/Login.jsx";
 import {
@@ -9,7 +10,6 @@ import {
 } from "../../features/auth/authSlice.js";
 
 const LoginPage = () => {
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -22,18 +22,18 @@ const LoginPage = () => {
 
   const handlerLogin = async (user) => {
     try {
-      setLoading(true);
       const res = await authApi.login(user);
+      console.log(res);
       if (res.status === 0) throw new Error(res.message);
       dispatch(authActions.login(res.result));
-      setLoading(false);
-      console.log(res);
+      toast.success(res.message);
     } catch (error) {
+      toast.error(error.message);
       console.log(error);
     }
   };
 
-  return <FormLogin handlerFormSubmit={handlerLogin} loading={loading} />;
+  return <FormLogin handlerFormSubmit={handlerLogin} />;
 };
 
 export default LoginPage;

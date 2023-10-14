@@ -6,6 +6,7 @@ import * as yup from "yup";
 
 import { phoneRegExp } from "../../../util/regExp.js";
 import "./FormCheckout.scss";
+import { Alert } from "react-bootstrap";
 
 function FormCheckout({ currentUser, handlerSubmit }) {
   const schema = yup.object().shape({
@@ -51,18 +52,22 @@ function FormCheckout({ currentUser, handlerSubmit }) {
           id="fullname"
           {...register("fullName")}
         />
-        {errors.customer_name && <p>{errors.customer_name.message}</p>}
+        {errors.customer_name && (
+          <Alert variant="danger">{errors.customer_name.message}</Alert>
+        )}
       </label>
 
       <label htmlFor="email">
         <span>Email:</span>
         <input
+          disabled
+          style={{ cursor: "no-drop" }}
           placeholder="Email"
           className="form-control"
           id="email"
           {...register("email")}
         />
-        {errors.email && <p>{errors.email.message}</p>}
+        {errors.email && <Alert variant="danger">{errors.email.message}</Alert>}
       </label>
 
       <label htmlFor="phonenumber">
@@ -75,7 +80,9 @@ function FormCheckout({ currentUser, handlerSubmit }) {
           id="phonenumber"
           {...register("phonenumber")}
         />
-        {errors.password && <p>{errors.password.message}</p>}
+        {errors.password && (
+          <Alert variant="danger">{errors.password.message}</Alert>
+        )}
       </label>
 
       <label htmlFor="address">
@@ -86,7 +93,7 @@ function FormCheckout({ currentUser, handlerSubmit }) {
           id="address"
           {...register("address")}
         />
-        {errors.phone && <p>{errors.phone.message}</p>}
+        {errors.phone && <Alert variant="danger">{errors.phone.message}</Alert>}
       </label>
       <button type="submit">Place order</button>
     </form>

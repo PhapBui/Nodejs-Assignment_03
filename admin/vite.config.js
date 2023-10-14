@@ -6,7 +6,8 @@ dotenv.config();
 export default defineConfig({
   plugins: [react()],
   define: {
-    // eslint-disable-next-line no-undef
+    /* eslint-disable no-undef */
     CLOUD_NAME: `"${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}"`,
+    BACKEND_URL: `"${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}"`,
   },
 });

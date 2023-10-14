@@ -1,16 +1,18 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 
-const initProduct = {
-  name: "",
-  images: "",
-  hotels: 0,
-};
-
 const initProductState = {
   productList: [],
   loading: false,
   message: "",
-  responseProduct: initProduct,
+  product: {
+    name: "",
+    price: 0,
+    quantity: 0,
+    category: "iPhone",
+    short_desc: "",
+    long_desc: "",
+    images: [],
+  },
 };
 
 const productSlice = createSlice({
@@ -23,12 +25,22 @@ const productSlice = createSlice({
     },
     fetchAllProductSuccessfully(state, action) {
       state.loading = false;
-      state.productList = action.payload.result;
-      state.message = action.payload.message;
+      state.productList = action.payload;
     },
     fetchAllProductFailed(state, action) {
       state.loading = false;
       state.message = action.payload;
+    },
+    // fetch product by id
+    fetchProductByIdStart(state) {
+      state.loading = true;
+    },
+    fetchProductByIdSuccess(state, action) {
+      state.loading = false;
+      state.product = action.payload;
+    },
+    fetchProductByIdFailed(state) {
+      state.loading = false;
     },
 
     // create new product
@@ -37,10 +49,38 @@ const productSlice = createSlice({
     },
     createNewProductSuccess(state) {
       state.loading = false;
+      state.product = {
+        name: "",
+        price: 0,
+        quantity: 0,
+        category: "iPhone",
+        short_desc: "",
+        long_desc: "",
+        images: [],
+      };
     },
     createNewProductFailed(state, action) {
       state.loading = false;
       state.message = action.payload;
+    },
+    // update product
+    updateProductStart(state) {
+      state.loading = true;
+    },
+    updateProductSuccess(state) {
+      state.loading = false;
+      state.product = {
+        name: "",
+        price: 0,
+        quantity: 0,
+        category: "iPhone",
+        short_desc: "",
+        long_desc: "",
+        images: [],
+      };
+    },
+    updateProductFailed(state) {
+      state.loading = false;
     },
 
     // remove product by id
@@ -50,13 +90,11 @@ const productSlice = createSlice({
     removeProductByIdSuccess(state, action) {
       state.loading = false;
       state.productList = state.productList.filter(
-        (product) => product._id !== action.payload.result._id
+        (product) => product._id !== action.payload
       );
-      state.message = action.payload.message;
     },
-    removeProductByIdFailed(state, action) {
+    removeProductByIdFailed(state) {
       state.loading = false;
-      state.message = action.payload;
     },
   },
 });
