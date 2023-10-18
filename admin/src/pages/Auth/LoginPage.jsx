@@ -26,7 +26,6 @@ const LoginPage = () => {
   const handlerLogin = async (user) => {
     dispatch(authActions.loginStart(user));
   };
-  console.log(import.meta.env.VITE_BACKEND_URL);
   return <FormLogin handlerFormSubmit={handlerLogin} loading={isLoading} />;
 };
 
