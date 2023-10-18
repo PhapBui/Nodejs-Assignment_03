@@ -19,12 +19,12 @@ const SignupSchema = yup.object().shape({
     .email("Please enter a valid email"),
 });
 
-function FormLogin({ handlerFormSubmit }) {
+function FormLogin({ handlerFormSubmit, logging }) {
   // init react-hook-form
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitted },
+    formState: { errors },
   } = useForm({
     defaultValues: {
       email: "",
@@ -63,8 +63,8 @@ function FormLogin({ handlerFormSubmit }) {
         )}
       </div>
 
-      <button type="submit" disabled={isSubmitted}>
-        {isSubmitted ? "Logging in..." : "Sign In"}
+      <button type="submit" disabled={logging}>
+        {logging ? "Logging in..." : "Sign In"}
       </button>
       <Link to="/auth/register">
         <span>Create an account?</span>

@@ -14,7 +14,7 @@ const LogoutPage = () => {
     }
   }, [dispatch, isLoggined, navigate]);
 
-  return <div></div>;
+  return <></>;
 };
 
 export default LogoutPage;

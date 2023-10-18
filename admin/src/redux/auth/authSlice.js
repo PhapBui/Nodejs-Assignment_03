@@ -38,6 +38,7 @@ const authSlice = createSlice({
       const expiryDate = new Date(new Date().getTime() + remainingMilliseconds);
       saveToStorage("timeExpired", expiryDate);
     },
+
     loginFailed: (state, action) => {
       state.loading = false;
       state.message = action.payload;
@@ -71,7 +72,7 @@ const authSlice = createSlice({
     // logout
     logout(state) {
       state.isLoggin = false;
-      state.user = null;
+      state.user = {};
       state.token = null;
 
       saveToStorage("currentUser", state.user);
@@ -87,6 +88,7 @@ export const authActions = authSlice.actions;
 // custome selector
 export const selectUserList = (state) => state.auth.userList;
 export const selectIsLoggedIn = (state) => state.auth.isLoggin;
+export const selectLoading = (state) => state.auth.loading;
 
 export const numberOfUser = createSelector(
   selectUserList,

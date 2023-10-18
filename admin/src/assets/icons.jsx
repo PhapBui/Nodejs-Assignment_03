@@ -11,6 +11,7 @@ import { GiNotebook } from "react-icons/gi";
 import { CiMobile3 } from "react-icons/ci";
 import { AiOutlineUserAdd, AiOutlineWechat } from "react-icons/ai";
 import { MdOutlineNoteAdd } from "react-icons/md";
+import { BsFillSendFill } from "react-icons/bs";
 
 export const icons = {
   dashboard: <BiSolidDashboard />,
@@ -28,4 +29,5 @@ export const icons = {
   chat: <AiOutlineWechat />,
   dollar: <FiDollarSign />,
   order: <MdOutlineNoteAdd />,
+  send: <BsFillSendFill />,
 };

@@ -16,7 +16,7 @@ import { useSelector } from "react-redux";
 import { categoryOption } from "../../../redux/category/categorySlice";
 
 // eslint-disable-next-line react/prop-types
-const FormProduct = ({ initProduct, handlerFormSubmit, formMode }) => {
+const FormProduct = ({ initProduct, handlerFormSubmit, formMode, loading }) => {
   // yup schema
   const productSchema = yup.object().shape({
     name: yup.string().required("Please enter product name"),
@@ -59,12 +59,7 @@ const FormProduct = ({ initProduct, handlerFormSubmit, formMode }) => {
   });
 
   // init hook form
-  const {
-    handleSubmit,
-    control,
-    reset,
-    formState: { isSubmitting },
-  } = useForm({
+  const { handleSubmit, control, reset } = useForm({
     mode: "onBlur",
     resolver: yupResolver(productSchema),
     defaultValues: initProduct,
@@ -230,8 +225,8 @@ const FormProduct = ({ initProduct, handlerFormSubmit, formMode }) => {
           ))}
       </Box>
 
-      <Button disabled={isSubmitting} type="submit" variant="contained">
-        {isSubmitting && <CircularProgress />}
+      <Button disabled={loading} type="submit" variant="contained">
+        {loading && <CircularProgress />}
         {formMode}
       </Button>
     </Box>

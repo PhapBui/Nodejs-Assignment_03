@@ -8,6 +8,9 @@ import LogoutPage from "../pages/Auth/LogoutPage";
 import ProductList from "../pages/Product/ProductList";
 import AddEditProduct from "../pages/Product/AddNewProduct";
 import AddEditCategory from "../pages/Category/AddEditCategory";
+import AdminChat from "../pages/Services/LiveChat/AdminChat";
+import Authorization from "../components/authorization/Authorization";
+import Orders from "../pages/Order/Orders";
 
 const router = createBrowserRouter([
   {
@@ -16,29 +19,49 @@ const router = createBrowserRouter([
     errorElement: <h1>Page not found</h1>,
     children: [
       {
-        index: true,
-        element: <Dashboard />,
-      },
-      {
-        path: "login",
-        element: <LoginPage />,
+        element: <Authorization roles={["Admin"]} />,
+        children: [
+          {
+            index: true,
+            element: <Dashboard />,
+          },
+
+          {
+            path: "products",
+            element: <ProductList />,
+          },
+          {
+            path: "orders",
+            element: <Orders />,
+          },
+          {
+            path: "add",
+            element: <AddEditPage />,
+            children: [
+              { path: "user", element: <AddNewUser /> },
+              { path: "product", element: <AddEditProduct /> },
+              { path: "category", element: <AddEditCategory /> },
+            ],
+          },
+        ],
       },
       {
         path: "logout",
         element: <LogoutPage />,
       },
       {
-        path: "products",
-        element: <ProductList />,
+        path: "login",
+        element: <LoginPage />,
       },
+    ],
+  },
+  {
+    path: "service",
+    element: <Authorization roles={["Sale", "Admin"]} />,
+    children: [
       {
-        path: "add",
-        element: <AddEditPage />,
-        children: [
-          { path: "user", element: <AddNewUser /> },
-          { path: "product", element: <AddEditProduct /> },
-          { path: "category", element: <AddEditCategory /> },
-        ],
+        path: "chat",
+        element: <AdminChat />,
       },
     ],
   },

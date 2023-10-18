@@ -28,21 +28,13 @@ const sidebarViewData = [
         icon: icons.dashboard,
         path: "/",
       },
-      {
-        title: "Users",
-        icon: icons.user,
-        path: "users",
-      },
+
       {
         title: "Orders",
         icon: icons.orders,
         path: "orders",
       },
-      {
-        title: "Categories",
-        icon: icons.type,
-        path: "categories",
-      },
+
       {
         title: "Products",
         icon: icons.product,
@@ -53,17 +45,11 @@ const sidebarViewData = [
   {
     title: "Add Edit",
     items: [
-      {
-        title: "User",
-        icon: icons.addUser,
-        path: "add/user",
-      },
-
-      {
-        title: "Categories",
-        icon: icons.type,
-        path: "add/category",
-      },
+      // {
+      //   title: "Categories",
+      //   icon: icons.type,
+      //   path: "add/category",
+      // },
       {
         title: "Products",
         icon: icons.product,

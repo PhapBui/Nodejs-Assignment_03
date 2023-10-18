@@ -52,8 +52,8 @@ function FormCheckout({ currentUser, handlerSubmit }) {
           id="fullname"
           {...register("fullName")}
         />
-        {errors.customer_name && (
-          <Alert variant="danger">{errors.customer_name.message}</Alert>
+        {errors.fullName && (
+          <Alert variant="danger">{errors.fullName.message}</Alert>
         )}
       </label>
 
@@ -80,8 +80,8 @@ function FormCheckout({ currentUser, handlerSubmit }) {
           id="phonenumber"
           {...register("phonenumber")}
         />
-        {errors.password && (
-          <Alert variant="danger">{errors.password.message}</Alert>
+        {errors.phonenumber && (
+          <Alert variant="danger">{errors.phonenumber.message}</Alert>
         )}
       </label>
 
@@ -93,7 +93,9 @@ function FormCheckout({ currentUser, handlerSubmit }) {
           id="address"
           {...register("address")}
         />
-        {errors.phone && <Alert variant="danger">{errors.phone.message}</Alert>}
+        {errors.address && (
+          <Alert variant="danger">{errors.address.message}</Alert>
+        )}
       </label>
       <button type="submit">Place order</button>
     </form>

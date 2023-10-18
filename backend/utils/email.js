@@ -44,7 +44,7 @@ const sendEmailOrder = async (orderId) => {
 
     //init emailData
     const emailData = {
-      to: "bvphap.tk@gmail.com",
+      to: currentOrder.userId.email,
       subject: "Order result",
       name: currentOrder.userId.fullName,
       listItem: currentOrder.items,

@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { InputField } from "../formField/InputField.jsx";
+import { InputField } from "../formField/InputField";
 
 const SignupSchema = yup.object().shape({
   password: yup
@@ -17,13 +17,9 @@ const SignupSchema = yup.object().shape({
     .email("Please enter a valid email"),
 });
 
-function FormLogin({ handlerFormSubmit }) {
+function FormLogin({ handlerFormSubmit, loading }) {
   // init react-hook-form
-  const {
-    handleSubmit,
-    control,
-    formState: { isSubmitted },
-  } = useForm({
+  const { handleSubmit, control } = useForm({
     defaultValues: {
       email: "",
       password: "",
@@ -57,8 +53,8 @@ function FormLogin({ handlerFormSubmit }) {
         autoComplete="username"
       />
 
-      <Button variant="contained" type="submit" disabled={isSubmitted}>
-        {isSubmitted ? "Logging in..." : "Sign In"}
+      <Button variant="contained" type="submit" disabled={loading}>
+        {loading ? "Logging in..." : "Sign In"}
       </Button>
     </form>
   );
@@ -66,6 +62,7 @@ function FormLogin({ handlerFormSubmit }) {
 
 FormLogin.propTypes = {
   handlerFormSubmit: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
 };
 
 export default FormLogin;

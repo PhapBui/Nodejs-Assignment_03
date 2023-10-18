@@ -8,7 +8,7 @@ const Header = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
     <HeaderWrapper>
-      <PageLogo>Header</PageLogo>
+      <PageLogo to="/">Header</PageLogo>
       <Button>
         <Link to={`/${isLoggedIn ? "logout" : "login"}`}>
           {isLoggedIn ? "Logout" : "Login"}

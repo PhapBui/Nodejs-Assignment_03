@@ -26,10 +26,34 @@
   }
 
   .body {
-    min-height: 300px;
+    height: 300px;
     padding: 0 20px;
     border-bottom: 1px solid #aaa;
     border-top: 1px solid #aaa;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    .message{
+      padding: 8px;
+      border-radius: 2px;
+      margin: 8px 0;
+      width: fit-content;
+    
+      &.left{
+        background-color: #c6c9c6;
+        text-align: left;
+            align-self: flex-start;
+      }
+      &.right{
+        background-color: #48b0f7;
+        color: #f6f9f6;
+        text-align: right;
+            align-self: flex-end;
+      }
+    }
+    .login-msg{
+      text-align: center;
+    }
   }
 
   .chat-footer {
@@ -50,6 +74,9 @@
           border: none;
           outline: none;
           padding: 4px 8px;
+          &:disabled{
+            cursor:no-drop
+          }
         }
       }
     }
@@ -67,6 +94,8 @@
 
       .send-btn {
         color: #48b0f7;
+        border: none;
+        background: unset;
       }
     }
   }

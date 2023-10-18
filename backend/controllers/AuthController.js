@@ -9,9 +9,11 @@ const login = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res
-        .status(422)
-        .json({ result: errors.array(), message: "Validation failed!" });
+      return res.status(422).json({
+        result: errors.array(),
+        status: 0,
+        message: "Validation failed!",
+      });
     }
 
     const { email, password } = req.body;
@@ -19,7 +21,8 @@ const login = async (req, res, next) => {
     if (!loadedUser) {
       return res.status(401).json({
         result: [],
-        message: "A user with this email could not be found!",
+        status: 0,
+        message: "Wrong email",
       });
     }
     const isMatchPassword = await bcrypt.compare(password, loadedUser.password);
@@ -88,6 +91,17 @@ const statistic = async (req, res, next) => {
         },
       },
     ]);
+    if (countNewOrder.length === 0) {
+      return res.status(200).json({
+        status: 1,
+        message: "Fetch statistic successfully",
+        result: {
+          countUser,
+          total: currency(0),
+          countOrder: 0,
+        },
+      });
+    }
     res.status(200).json({
       status: 1,
       message: "Fetch statistic successfully",

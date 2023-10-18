@@ -2,12 +2,14 @@ import request from "axios";
 import { call, put, takeLatest } from "redux-saga/effects";
 import { authActions } from "./authSlice";
 import { authApi } from "../../api/authApi";
+import { toast } from "react-toastify";
 
 function* login(action) {
   try {
     const res = yield call(authApi.login, action.payload);
     if (res.status === 0) throw new Error(res.message);
     yield put(authActions.loginSuccessfully(res.result));
+    toast.success(res.message);
   } catch (error) {
     let message;
     if (request.isAxiosError(error)) {
@@ -16,6 +18,7 @@ function* login(action) {
       message = error;
     }
     console.log(error);
+    toast.error(message);
     yield put(authActions.loginFailed(message));
   }
 }

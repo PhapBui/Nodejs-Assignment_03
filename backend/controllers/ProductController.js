@@ -9,6 +9,7 @@ const getAllProducts = async (req, res, next) => {
     if (cate) option.category = cate;
 
     const products = await Product.find(option);
+    if (!products) res.status(404).json({ message: "Not Found" });
 
     res.status(200).json({
       message: "Fetch all products successfully!",

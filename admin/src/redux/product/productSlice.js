@@ -102,6 +102,7 @@ const productSlice = createSlice({
 export const productActions = productSlice.actions;
 
 export const selectProductList = (state) => state.product.productList;
+export const selectLoading = (state) => state.product.loading;
 
 export const productOption = createSelector(selectProductList, (productList) =>
   productList.map((product) => ({

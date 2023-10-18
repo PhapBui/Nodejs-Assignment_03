@@ -1,5 +1,5 @@
 const express = require("express");
-// const fs = require("fs");
+const http = require("http");
 const path = require("path");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -15,8 +15,11 @@ const CategoryRouter = require("./routes/CategoryRoute");
 const CartRouter = require("./routes/CartRoute");
 const OrderRouter = require("./routes/OrderRoute");
 
+const { clientChat, adminChat } = require("./controllers/ChatController");
+
 const app = express();
 
+// multer storage
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "images");
@@ -25,18 +28,13 @@ const fileStorage = multer.diskStorage({
     cb(null, new Date().getTime() + file.originalname);
   },
 });
-
+// multer filter
 const fileFilter = (req, file, cb) => {
   // check file type
   const isImage =
     file.mimetype === "image/png" ||
     file.mimetype === "image/jpg" ||
     file.mimetype === "image/jpeg";
-
-  // const imageName = file.originalname;
-  // const imagePath = path.join(__dirname, "images", imageName);
-  // const isExist = fs.existsSync(imagePath);
-  // console.log(isExist);
 
   if (isImage) {
     cb(null, true);
@@ -71,11 +69,8 @@ app.use(
   CartRouter,
   OrderRouter
 );
-// app.use("/api", AuthRouter);
-// app.use("/api", ProductRouter);
-// app.use("/api", CategoryRouter);
-// app.use("/api", CartRouter);
 
+// handler errors
 app.use((error, req, res, next) => {
   console.log(error);
   const status = error.statusCode || 500;
@@ -84,14 +79,21 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message: message, data: data });
 });
 
+// // Socket.io setup
 mongoose
   .connect(mongodbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     const server = app.listen(5000, () => console.log("App Started"));
-    const io = require("socket.io")(server);
-    io.on("connection", (socket) => {
-      console.log("Client Connected");
+    // connect socket io
+    const io = require("./socket").init(server, {
+      cors: {
+        origin: "*",
+        methods: ["GET", "POST"],
+        allowedHeaders: ["my-custom-header"],
+        credentials: true,
+      },
     });
+    io.on("connection", () => {});
   })
   .catch((err) => {
     console.log(err);

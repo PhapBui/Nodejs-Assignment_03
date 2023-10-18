@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { memo, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../Footer/Footer.jsx";
@@ -6,6 +6,7 @@ import NavBar from "../NavBar/NavBar.jsx";
 import "./DefaultLayout.scss";
 import { authActions } from "../../features/auth/authSlice.js";
 import { getFromStorage } from "../../util/localStorage.js";
+import ChatPopup from "../LiveChat/ClientChat.jsx";
 
 const DefaultLayout = () => {
   const dispatch = useDispatch();
@@ -36,9 +37,10 @@ const DefaultLayout = () => {
     <>
       <NavBar />
       <Outlet />
+      {ChatPopup()}
       <Footer />
     </>
   );
 };
 
-export default DefaultLayout;
+export default memo(DefaultLayout);

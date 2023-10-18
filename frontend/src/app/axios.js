@@ -33,7 +33,7 @@ clientAxios.interceptors.response.use(
     return response.data;
   },
   function (error) {
-    if (error.response.status < 500) {
+    if (error.response && error.response.status < 500) {
       return error.response.data;
     }
     // Any status codes that falls outside the range of 2xx cause this function to trigger

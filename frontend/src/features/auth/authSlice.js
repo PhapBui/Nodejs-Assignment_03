@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { getFromStorage, saveToStorage } from "../../util/localStorage.js";
 
 // Get userList, login status, current user from localstorage
@@ -30,9 +30,9 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.token = action.payload.token;
 
-      saveToStorage("currentUser", state.currentUser);
+      saveToStorage("currentUser", state.currentUser || {});
       saveToStorage("isLoggedIn", state.isLoggedIn);
-      saveToStorage("token", state.token);
+      saveToStorage("token", state.token || null);
       const remainingMilliseconds = 24 * 60 * 60 * 1000;
       const expiryDate = new Date(new Date().getTime() + remainingMilliseconds);
       saveToStorage("timeExpired", expiryDate);
@@ -57,6 +57,10 @@ export const authActions = authSlice.actions;
 export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 export const selectCurrentUser = (state) => state.auth.currentUser;
 export const selectUserList = (state) => state.auth.userArr;
+export const selectUserId = createSelector(
+  selectCurrentUser,
+  (user) => user._id
+);
 
 const authReducer = authSlice.reducer;
 

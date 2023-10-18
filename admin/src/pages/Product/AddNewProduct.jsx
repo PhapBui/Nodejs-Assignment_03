@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FormProduct from "../../components/form/product/formProduct";
 import {
   productActions,
+  selectLoading,
   selectProductList,
 } from "../../redux/product/productSlice";
 import { useSearchParams } from "react-router-dom";
@@ -12,6 +13,7 @@ const AddEditProduct = () => {
   const [formMode, setFormMode] = useState("Create");
 
   const product = useSelector((state) => state.product.product);
+  const loading = useSelector(selectLoading);
 
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
@@ -43,6 +45,7 @@ const AddEditProduct = () => {
       initProduct={product}
       handlerFormSubmit={handleCreateNewProduct}
       formMode={formMode}
+      loading={loading}
     />
   );
 };

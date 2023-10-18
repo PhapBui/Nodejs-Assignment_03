@@ -64,7 +64,7 @@ const NavBar = () => {
 
   // post cart
   useEffect(() => {
-    if (!cartSave || !isLoggined) return;
+    if (!cartSave || !isLoggined || !subTotal) return;
     const timeDelay = setTimeout(() => {
       cartApi.postCart({ items: cartSave, subTotal });
     }, 1000);
