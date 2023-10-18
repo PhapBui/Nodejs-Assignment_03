@@ -16,6 +16,6 @@ router.post("/login", userLoginSchema, AuthController.login);
 
 // signup
 router.post("/signup", userSignupSchema, AuthController.signup);
-router.get("/statistic", AuthController.statistic);
+router.get("/statistic", isAuth, AuthController.statistic);
 
 module.exports = router;

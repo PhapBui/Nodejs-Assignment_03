@@ -20,6 +20,7 @@ import {
   selectProductList,
 } from "../../redux/product/productSlice";
 import { currency } from "../../utils/currency";
+import { replaceImgUrl } from "../../utils/image";
 
 const ProductList = () => {
   // init page values
@@ -98,7 +99,7 @@ const ProductList = () => {
                   <TableCell align="center">
                     {
                       <img
-                        src={product.images[0]}
+                        src={replaceImgUrl(product.images[0])}
                         alt={product.name}
                         width="100px"
                       />

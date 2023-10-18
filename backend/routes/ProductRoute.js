@@ -6,6 +6,7 @@ const router = express.Router();
 const isAuth = require("../middlewares/is-auth");
 
 const ProductController = require("../controllers/ProductController");
+const { createProductSchema } = require("../schema-validations/product");
 
 // get all products
 router.get("/product", ProductController.getAllProducts);
@@ -14,9 +15,19 @@ router.get("/product", ProductController.getAllProducts);
 router.get("/product/:productId", ProductController.getProductById);
 
 // create new Product
-router.post("/product", isAuth, ProductController.createNewProduct);
+router.post(
+  "/product",
+  createProductSchema,
+  isAuth,
+  ProductController.createNewProduct
+);
 // update product
-router.put("/product/:productId", isAuth, ProductController.updateProductById);
+router.put(
+  "/product/:productId",
+  createProductSchema,
+  isAuth,
+  ProductController.updateProductById
+);
 
 // delete product by Id
 router.delete(

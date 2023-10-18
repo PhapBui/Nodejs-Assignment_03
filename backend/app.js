@@ -1,5 +1,4 @@
 const express = require("express");
-const http = require("http");
 const path = require("path");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -14,8 +13,6 @@ const ProductRouter = require("./routes/ProductRoute");
 const CategoryRouter = require("./routes/CategoryRoute");
 const CartRouter = require("./routes/CartRoute");
 const OrderRouter = require("./routes/OrderRoute");
-
-const { clientChat, adminChat } = require("./controllers/ChatController");
 
 const app = express();
 
@@ -79,11 +76,14 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message: message, data: data });
 });
 
-// // Socket.io setup
+const PORT = process.env.PORT || 5000;
+
 mongoose
   .connect(mongodbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
-    const server = app.listen(5000, () => console.log("App Started"));
+    const server = app.listen(PORT, () => {
+      console.log("App Started at PORT: " + PORT);
+    });
     // connect socket io
     const io = require("./socket").init(server, {
       cors: {

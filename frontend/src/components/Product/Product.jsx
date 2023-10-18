@@ -2,6 +2,7 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import "./Product.scss";
 import { currency } from "../../util/currency.js";
+import { replaceImgUrl } from "../../util/image";
 
 const Product = ({ productData, handlerProductDetail }) => {
   const handleClick = () => {
@@ -9,7 +10,7 @@ const Product = ({ productData, handlerProductDetail }) => {
   };
   return (
     <Card className="product" onClick={handleClick}>
-      <Card.Img variant="top" src={productData.images[0]} />
+      <Card.Img variant="top" src={replaceImgUrl(productData.images[0])} />
       <Card.Body>
         <Card.Title className="product__name">{productData.name}</Card.Title>
         <Card.Text className="product__price">

@@ -3,6 +3,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
     "start-server": "node app.js"
+  },"engines": {
+    "node": ">=16.0.0"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

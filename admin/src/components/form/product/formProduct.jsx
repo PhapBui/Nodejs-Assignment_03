@@ -14,6 +14,7 @@ import { SelectField } from "../formField/SelectField";
 import { InputField } from "../formField/InputField";
 import { useSelector } from "react-redux";
 import { categoryOption } from "../../../redux/category/categorySlice";
+import { replaceImgUrl } from "../../../utils/image";
 
 // eslint-disable-next-line react/prop-types
 const FormProduct = ({ initProduct, handlerFormSubmit, formMode, loading }) => {
@@ -189,39 +190,41 @@ const FormProduct = ({ initProduct, handlerFormSubmit, formMode, loading }) => {
 
       {/* Upload images */}
 
-      <Controller
-        control={control}
-        name={"images"}
-        render={({ field: { value, onChange, ...field } }) => {
-          return (
-            <FormControl fullWidth>
-              <FormLabel>Upload image (5 images)</FormLabel>
-              <InputField
-                control={control}
-                name="images"
-                {...field}
-                ref={null}
-                value={value?.fileName}
-                onChange={async (e) => {
-                  await handlerOnchange(e.target.files);
-                  onChange(e.target.files);
-                }}
-                type="file"
-                inputProps={{
-                  multiple: true,
-                  accept: "image/*",
-                }}
-              />
-            </FormControl>
-          );
-        }}
-      />
+      {formMode === "Create" && (
+        <Controller
+          control={control}
+          name={"images"}
+          render={({ field: { value, onChange, ...field } }) => {
+            return (
+              <FormControl fullWidth>
+                <FormLabel>Upload image (5 images)</FormLabel>
+                <InputField
+                  control={control}
+                  name="images"
+                  {...field}
+                  ref={null}
+                  value={value?.fileName}
+                  onChange={async (e) => {
+                    await handlerOnchange(e.target.files);
+                    onChange(e.target.files);
+                  }}
+                  type="file"
+                  inputProps={{
+                    multiple: true,
+                    accept: "image/*",
+                  }}
+                />
+              </FormControl>
+            );
+          }}
+        />
+      )}
 
       {/* Preview image */}
       <Box>
         {imgUrls &&
           imgUrls.map((url) => (
-            <img width={200} src={url} alt={url} key={url} />
+            <img width={200} src={url} alt={replaceImgUrl(url)} key={url} />
           ))}
       </Box>
 

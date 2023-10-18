@@ -1,3 +1,4 @@
+const Category = require("../models/Category");
 const Product = require("../models/Product");
 const { deleteFile } = require("../utils/file");
 
@@ -29,8 +30,15 @@ const createNewProduct = async (req, res, next) => {
     const { name, price, category, short_desc, long_desc, quantity } = req.body;
     const files = req.files;
 
+    const categories = await Category.find().select("name");
+    const categoriesName = categories.map((cate) => cate.name);
+
+    if (!categoriesName.includes(category)) {
+      return res.status(403).json({ message: "Category not found" });
+    }
+
     // create imgs path
-    const imgUrl = files.map((img) => "http://localhost:5000/" + img.path);
+    const imgUrl = files.map((img) => img.path);
 
     const product = {
       name,
