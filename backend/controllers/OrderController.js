@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const Cart = require("../models/Cart");
 const Order = require("../models/Order");
+const Product = require("../models/Product");
 const sendEmailOrder = require("../utils/email");
 
 // get all orders
@@ -35,6 +36,7 @@ const getAllOrder = async (req, res, next) => {
 };
 
 // save order to database and send an email to user
+
 const completeOrder = async (req, res, next) => {
   try {
     const { userId } = req;
@@ -43,6 +45,13 @@ const completeOrder = async (req, res, next) => {
     const userDoc = await User.findById(userId);
 
     const cart = await Cart.findOne({ userId });
+
+    for (let i = 0; i < cart.items.length; i++) {
+      const product = await Product.findById(cart.items[i].productId);
+      product.quantity -= cart.items[i].quantity;
+      product.save();
+    }
+
     const order = new Order({
       userId: userId,
       items: cart.items,

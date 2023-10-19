@@ -24,7 +24,6 @@ const BillingDetails = () => {
         dispatch(cartActions.emptyCart());
         toast.success(res.message);
       } else {
-        toast.error(res.message);
         throw new Error(res.message);
       }
     } catch (error) {

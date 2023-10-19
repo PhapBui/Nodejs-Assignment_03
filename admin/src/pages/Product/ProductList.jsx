@@ -58,6 +58,8 @@ const ProductList = () => {
   }, [enteredKeyword, fullProductList]);
 
   const handlerRemoveProduct = (productId) => {
+    const isComfirm = confirm("Product will be deleted permanent");
+    if (!isComfirm) return;
     dispatch(productActions.removeProductByIdStart(productId));
   };
 

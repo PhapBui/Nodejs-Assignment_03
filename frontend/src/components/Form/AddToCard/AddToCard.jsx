@@ -40,7 +40,7 @@ const AddToCard = ({ product, onSubmit }) => {
     if (!isLoggedIn) {
       toast.warn("You need login");
 
-      return navigate("/login");
+      return navigate("/auth/login");
     }
 
     const newProduct = {
@@ -48,7 +48,7 @@ const AddToCard = ({ product, onSubmit }) => {
       quantity,
     };
     onSubmit(newProduct);
-    toast.success("Success");
+    toast.success("Add product success");
     setQuantity(1);
   };
 
