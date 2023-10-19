@@ -11,10 +11,10 @@ import * as yup from "yup";
 import { generateBase64FromImage } from "../../../utils/generatorBase64Image";
 import { useEffect, useState } from "react";
 import { SelectField } from "../formField/SelectField";
-import { InputField } from "../formField/InputField";
 import { useSelector } from "react-redux";
 import { categoryOption } from "../../../redux/category/categorySlice";
 import { replaceImgUrl } from "../../../utils/image";
+import Input from "../formField/inputFieldFFF";
 
 // eslint-disable-next-line react/prop-types
 const FormProduct = ({ initProduct, handlerFormSubmit, formMode, loading }) => {
@@ -132,23 +132,19 @@ const FormProduct = ({ initProduct, handlerFormSubmit, formMode, loading }) => {
       {/* Product Name */}
       <FormControl fullWidth>
         <FormLabel>Product Name</FormLabel>
-        <InputField control={control} name="name" placeholder="Product Name" />
+        <Input control={control} name="name" placeholder="Product Name" />
       </FormControl>
 
       {/* Product Price */}
       <FormControl fullWidth>
         <FormLabel>Product Price</FormLabel>
-        <InputField
-          name="price"
-          control={control}
-          placeholder="Product Price"
-        />
+        <Input name="price" control={control} placeholder="Product Price" />
       </FormControl>
 
       {/* Product Quantity */}
       <FormControl fullWidth>
         <FormLabel>Product Quantity</FormLabel>
-        <InputField
+        <Input
           type="number"
           control={control}
           name="quantity"
@@ -167,7 +163,7 @@ const FormProduct = ({ initProduct, handlerFormSubmit, formMode, loading }) => {
       {/* Short Description */}
       <FormControl fullWidth>
         <FormLabel>Short Description</FormLabel>
-        <InputField
+        <Input
           control={control}
           name="short_desc"
           placeholder="Short Description"
@@ -179,7 +175,7 @@ const FormProduct = ({ initProduct, handlerFormSubmit, formMode, loading }) => {
       {/* Long Description */}
       <FormControl fullWidth>
         <FormLabel>Long Description</FormLabel>
-        <InputField
+        <Input
           control={control}
           name="long_desc"
           placeholder="Long Description"
@@ -198,7 +194,7 @@ const FormProduct = ({ initProduct, handlerFormSubmit, formMode, loading }) => {
             return (
               <FormControl fullWidth>
                 <FormLabel>Upload image (5 images)</FormLabel>
-                <InputField
+                <Input
                   control={control}
                   name="images"
                   {...field}

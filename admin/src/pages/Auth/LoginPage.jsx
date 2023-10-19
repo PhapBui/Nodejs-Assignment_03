@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import FormLogin from "../../components/Form/Login/Login.jsx";
 import {
   authActions,
   selectIsLoggedIn,
   selectLoading,
 } from "../../redux/auth/authSlice.js";
+import FormLogin from "../../components/Form/Login/Login";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
