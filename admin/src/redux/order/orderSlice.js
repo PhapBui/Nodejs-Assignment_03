@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initOrderState = {
   orderList: [],
+  order: {},
   loading: false,
 };
 
@@ -20,14 +21,24 @@ const orderSlice = createSlice({
     fetchAllOrderFailed(state) {
       state.loading = false;
     },
-
-    // updateOrder
+    // get order by id
+    getOrderById(state) {
+      state.loading = true;
+    },
+    getOrderByIdSuccess(state, action) {
+      state.loading = false;
+      state.order = action.payload;
+    },
+    getOrderByIdFailed(state) {
+      state.loading = false;
+    },
   },
 });
 
 export const orderActions = orderSlice.actions;
 
 export const selectOrderList = (state) => state.order.orderList;
+export const selectOrder = (state) => state.order.order;
 
 const orderReducer = orderSlice.reducer;
 

@@ -35,8 +35,27 @@ const getAllOrder = async (req, res, next) => {
   }
 };
 
-// save order to database and send an email to user
+const getOrderById = async (req, res, next) => {
+  try {
+    const { orderId } = req.params;
+    const orderDoc = await Order.findById(orderId)
+      .populate(["items.productId", "userId"])
+      .exec();
+    if (!orderDoc) {
+      return res
+        .status(404)
+        .json({ status: 0, message: "Order not found", result: {} });
+    }
+    res
+      .status(200)
+      .json({ status: 1, message: "Get order success", result: orderDoc });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ status: 0, message: "Internal Error server" });
+  }
+};
 
+// complete Order
 const completeOrder = async (req, res, next) => {
   try {
     const { userId } = req;
@@ -88,4 +107,5 @@ const completeOrder = async (req, res, next) => {
 module.exports = {
   completeOrder,
   getAllOrder,
+  getOrderById,
 };

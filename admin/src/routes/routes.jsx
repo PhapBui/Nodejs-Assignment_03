@@ -6,6 +6,7 @@ import LoginPage from "@/pages/Auth/LoginPage";
 import LogoutPage from "@/pages/Auth/LogoutPage";
 import AddEditCategory from "@/pages/Category/AddEditCategory";
 import Dashboard from "@/pages/Dashboard";
+import OrderDetail from "@/pages/Order/OrderDetail";
 import Orders from "@/pages/Order/Orders";
 import AddEditProduct from "@/pages/Product/AddNewProduct";
 import ProductList from "@/pages/Product/ProductList";
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
           {
             path: "orders",
             element: <Orders />,
+          },
+          {
+            path: "order/detail/:orderId",
+            element: <OrderDetail />,
           },
           {
             path: "add",

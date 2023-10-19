@@ -8,6 +8,7 @@ const checkProductQuantity = require("../middlewares/checkProductQuantity");
 const router = express.Router();
 
 router.get("/order", isAuth, orderController.getAllOrder);
+router.get("/order/:orderId", isAuth, orderController.getOrderById);
 
 router.post(
   "/order",

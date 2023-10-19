@@ -22,6 +22,18 @@ function* getAllOrder() {
   }
 }
 
+function* getOrderById(action) {
+  try {
+    const res = yield call(orderApi.getOrderById, action.payload);
+    if (res.status === 0) throw new Error(res.message);
+    yield put(orderActions.getOrderByIdSuccess(res.result));
+  } catch (error) {
+    toast.error(error.message);
+    console.log(error);
+  }
+}
+
 export default function* orderSaga() {
   yield takeLatest(orderActions.fetchAllOrderStart, getAllOrder);
+  yield takeLatest(orderActions.getOrderById, getOrderById);
 }
