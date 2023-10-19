@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import { HeaderWrapper, PageLogo } from "./HeaderStyled";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "../../redux/auth/authSlice";
+import { selectIsLoggedIn } from "@/redux/auth/authSlice";
 
 const Header = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);

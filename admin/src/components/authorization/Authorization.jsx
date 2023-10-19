@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { selectIsLoggedIn } from "../../redux/auth/authSlice";
 import { useEffect } from "react";
+import { selectIsLoggedIn } from "@/redux/auth/authSlice";
 
 const Authorization = ({ roles }) => {
   const navigate = useNavigate();

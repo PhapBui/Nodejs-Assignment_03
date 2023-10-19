@@ -3,7 +3,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { orderActions } from "./orderSlice";
 
 import { toast } from "react-toastify";
-import orderApi from "../../api/orderApi";
+import orderApi from "@/api/orderApi";
 
 function* getAllOrder() {
   try {

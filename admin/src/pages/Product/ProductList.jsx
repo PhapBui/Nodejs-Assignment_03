@@ -18,9 +18,9 @@ import { Link } from "react-router-dom";
 import {
   productActions,
   selectProductList,
-} from "../../redux/product/productSlice";
-import { currency } from "../../utils/currency";
-import { replaceImgUrl } from "../../utils/image";
+} from "@/redux/product/productSlice";
+import { currency } from "@/utils/currency";
+import { replaceImgUrl } from "@/utils/image";
 
 const ProductList = () => {
   // init page values

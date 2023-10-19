@@ -1,8 +1,8 @@
 import request from "axios";
 import { call, put, takeLatest } from "redux-saga/effects";
 import { authActions } from "./authSlice";
-import { authApi } from "../../api/authApi";
 import { toast } from "react-toastify";
+import { authApi } from "@/api/authApi";
 
 function* login(action) {
   try {

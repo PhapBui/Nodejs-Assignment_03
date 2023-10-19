@@ -8,13 +8,13 @@ import {
 } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { generateBase64FromImage } from "../../../utils/generatorBase64Image";
 import { useEffect, useState } from "react";
 import { SelectField } from "../formField/SelectField";
 import { useSelector } from "react-redux";
-import { categoryOption } from "../../../redux/category/categorySlice";
-import { replaceImgUrl } from "../../../utils/image";
 import Input from "../formField/inputFieldFFF";
+import { categoryOption } from "@/redux/category/categorySlice";
+import { generateBase64FromImage } from "@/utils/generatorBase64Image";
+import { replaceImgUrl } from "@/utils/image";
 
 // eslint-disable-next-line react/prop-types
 const FormProduct = ({ initProduct, handlerFormSubmit, formMode, loading }) => {

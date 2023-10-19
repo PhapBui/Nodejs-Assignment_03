@@ -1,11 +1,7 @@
-import FormProduct from "../../components/form/product/formProduct";
+import FormProduct from "@/components/form/product/formProduct";
 
 const AddNewUser = () => {
-  return (
-    <div>
-      <FormProduct />
-    </div>
-  );
+  return <FormProduct />;
 };
 
 export default AddNewUser;

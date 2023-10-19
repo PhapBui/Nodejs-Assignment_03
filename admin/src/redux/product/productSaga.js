@@ -3,8 +3,8 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { productActions } from "./productSlice";
 
 import { toast } from "react-toastify";
-import { productApi } from "../../api/productApi";
-import router from "../../routes/routes";
+import { productApi } from "@/api/productApi";
+import router from "@/routes/routes";
 
 // get all Product
 function* getAllProduct() {

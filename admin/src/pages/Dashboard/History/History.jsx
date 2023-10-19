@@ -1,3 +1,5 @@
+import { selectOrderList } from "@/redux/order/orderSlice";
+import { currency } from "@/utils/currency";
 import {
   Button,
   Paper,
@@ -11,8 +13,6 @@ import {
 import { useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
-import { selectOrderList } from "../../../redux/order/orderSlice";
-import { currency } from "../../../utils/currency";
 
 const History = () => {
   const orders = useSelector(selectOrderList);

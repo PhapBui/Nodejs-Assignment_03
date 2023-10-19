@@ -1,7 +1,7 @@
+import { authActions, selectIsLoggedIn } from "@/redux/auth/authSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { authActions, selectIsLoggedIn } from "../../redux/auth/authSlice.js";
 const LogoutPage = () => {
   const dispatch = useDispatch();
   const isLoggined = useSelector(selectIsLoggedIn);

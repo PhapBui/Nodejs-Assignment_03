@@ -1,5 +1,4 @@
 import React from "react";
-import { icons } from "../../assets/icons";
 import {
   Item,
   ListItem,
@@ -8,6 +7,7 @@ import {
   NavTitle,
   NavbarWrapper,
 } from "./SidebarStyled";
+import { icons } from "@/assets/icons";
 
 const sidebarViewData = [
   {

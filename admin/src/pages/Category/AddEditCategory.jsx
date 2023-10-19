@@ -1,6 +1,5 @@
+import { categoryApi } from "@/api/categoryApi";
 import { useState } from "react";
-
-import { categoryApi } from "../../api/categoryApi";
 
 const AddEditCategory = () => {
   const [images, setImages] = useState();

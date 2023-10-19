@@ -1,9 +1,9 @@
 import { Box, Paper, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { orderActions } from "../../redux/order/orderSlice";
-import History from "./History/History";
+import { orderActions } from "@/redux/order/orderSlice";
 import Statistic from "./Statistic/Statistic";
+import History from "./History/History";
 
 const Dashboard = () => {
   const dispatch = useDispatch();

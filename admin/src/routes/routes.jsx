@@ -1,16 +1,16 @@
+import Authorization from "@/components/authorization/Authorization";
+import MainLayout from "@/layouts/MainLayout";
+import AddEditPage from "@/pages/AddEdit/AddEditPage";
+import AddNewUser from "@/pages/Auth/AddNewUser";
+import LoginPage from "@/pages/Auth/LoginPage";
+import LogoutPage from "@/pages/Auth/LogoutPage";
+import AddEditCategory from "@/pages/Category/AddEditCategory";
+import Dashboard from "@/pages/Dashboard";
+import Orders from "@/pages/Order/Orders";
+import AddEditProduct from "@/pages/Product/AddNewProduct";
+import ProductList from "@/pages/Product/ProductList";
+import AdminChat from "@/pages/Services/LiveChat/AdminChat";
 import { createBrowserRouter } from "react-router-dom";
-import MainLayout from "../layouts/MainLayout";
-import Dashboard from "../pages/Dashboard";
-import AddEditPage from "../pages/AddEdit/AddEditPage";
-import AddNewUser from "../pages/Auth/AddNewUser";
-import LoginPage from "../pages/Auth/LoginPage";
-import LogoutPage from "../pages/Auth/LogoutPage";
-import ProductList from "../pages/Product/ProductList";
-import AddEditProduct from "../pages/Product/AddNewProduct";
-import AddEditCategory from "../pages/Category/AddEditCategory";
-import AdminChat from "../pages/Services/LiveChat/AdminChat";
-import Authorization from "../components/authorization/Authorization";
-import Orders from "../pages/Order/Orders";
 
 const router = createBrowserRouter([
   {

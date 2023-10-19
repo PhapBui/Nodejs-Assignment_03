@@ -1,5 +1,4 @@
 import { Divider } from "@mui/material";
-import Header from "../../../components/header/Header";
 import {
   ChatBoard,
   ChatSidebar,
@@ -11,6 +10,7 @@ import ChatHistory from "./components/ChatHistory/ChatHistory";
 import ChatList from "./components/ChatList/ChatList";
 import ChatInput from "./components/MessageInput/ChatInput";
 import SearchContact from "./components/SearchContact/SearchContact";
+import Header from "@/components/header/Header";
 
 function AdminChat() {
   return (

@@ -1,6 +1,6 @@
+import { cssVariables } from "@/utils/theme";
 import { styled } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { cssVariables } from "../../utils/theme";
 
 export const NavbarWrapper = styled("nav")(() => ({
   width: cssVariables.width.sidebar,

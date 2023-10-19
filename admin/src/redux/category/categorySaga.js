@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { categoryActions } from "./categorySlice";
-import { categoryApi } from "../../api/categoryApi";
+import { categoryApi } from "@/api/categoryApi";
 
 function* fetchAllCategory() {
   try {

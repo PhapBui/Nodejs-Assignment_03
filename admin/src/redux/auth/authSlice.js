@@ -1,5 +1,5 @@
+import { getFromStorage, saveToStorage } from "@/utils/localStorage";
 import { createSelector, createSlice } from "@reduxjs/toolkit";
-import { getFromStorage, saveToStorage } from "../../utils/localStorage";
 
 // Get userList, login status, current user from localstorage
 const isLoggedIn = getFromStorage("isLoggedIn", false);

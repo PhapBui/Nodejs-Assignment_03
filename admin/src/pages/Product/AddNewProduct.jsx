@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import FormProduct from "../../components/form/product/formProduct";
+
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
 import {
   productActions,
   selectLoading,
   selectProductList,
-} from "../../redux/product/productSlice";
-import { useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
-import { useState } from "react";
+} from "@/redux/product/productSlice";
 
 const AddEditProduct = () => {
   const [formMode, setFormMode] = useState("Create");

@@ -1,6 +1,6 @@
+import { cssVariables } from "@/utils/theme";
 import { styled } from "@mui/material";
 import { Link } from "react-router-dom";
-import { cssVariables } from "../../utils/theme";
 
 export const HeaderWrapper = styled("header")(() => ({
   display: "flex",

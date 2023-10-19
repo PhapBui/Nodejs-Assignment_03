@@ -1,8 +1,8 @@
 import { Card, CardContent, Stack, Typography } from "@mui/material";
-import { icons } from "../../../assets/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { authActions } from "../../../redux/auth/authSlice";
+import { icons } from "@/assets/icons";
+import { authActions } from "@/redux/auth/authSlice";
 
 const createStatisticData = (statistic) => {
   return [

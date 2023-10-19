@@ -1,12 +1,12 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "../components/header/Header";
-import Sidebar from "../components/sidebar/Sidebar";
 import { MainBody, Wrapper } from "./MainLayoutStyled";
-import PageContentWrapper from "../components/UI/PageContentWrapper";
 import { useDispatch } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { authActions } from "../redux/auth/authSlice";
-import { getFromStorage } from "../utils/localStorage";
+import { authActions } from "@/redux/auth/authSlice";
+import { getFromStorage } from "@/utils/localStorage";
+import Sidebar from "@/components/sidebar/Sidebar";
+import PageContentWrapper from "@/components/UI/PageContentWrapper";
 
 const MainLayout = () => {
   const dispatch = useDispatch();

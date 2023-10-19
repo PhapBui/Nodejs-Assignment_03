@@ -1,5 +1,5 @@
+import { cssVariables } from "@/utils/theme";
 import { Box, Container, Stack, styled } from "@mui/material";
-import { cssVariables } from "../../../utils/theme";
 
 export const ServiceLayout = styled(Container)({
   height: "100vh",
