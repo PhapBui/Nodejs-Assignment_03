@@ -123,21 +123,12 @@ https://node-assignment03.onrender.com/
 
 ## Available Scripts
 
-- I
-  n app directory you can run:
+- In app directory you can run:
 
-### `yarn install` or `npm install`
+### `npm install`
 
 - install all packages
 
-### `yarn dev` or `npm run dev`
+### `npm start`
 
-- Runs the app in the development mode [http://localhost:5173/]
-
-### `yarn build` or `npm run build`
-
-- build for production
-
-### `yarn preview` or `npm run preview`
-
-- locally preview production build
+- Runs the app in the development mode [http://localhost:5000/]
