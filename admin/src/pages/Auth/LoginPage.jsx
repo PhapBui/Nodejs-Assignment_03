@@ -17,7 +17,7 @@ const LoginPage = () => {
   // Navigate when user login
   useEffect(() => {
     if (isLoggedIn) {
-      userRole === "Admin" ? navigate("/") : navigate("/service/chat");
+      navigate("/");
     }
   }, [navigate, isLoggedIn, userRole]);
 

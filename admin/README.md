@@ -1,8 +1,39 @@
-# React + Vite
+# Project introduction
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Name: Ecommerce Shop - Admin Page
+- Technology: React(Vite), Redux, Redux Toolkit, Redux Saga, MUI, React Hook Form, Yup...
+- Admin account:
+  username: bvphap.tk@gmail.com
+  password: 12345678
 
-Currently, two official plugins are available:
+# Functional description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- CRUD products, categories
+- Management orders
+- Statistic value stream
+
+# Demo link
+
+https://admin-nu-seven.vercel.app/
+
+# Deployment guide (on local)
+
+## Available Scripts
+
+- In app directory you can run:
+
+### `yarn install` or `npm install`
+
+- install all packages
+
+### `yarn dev` or `npm run dev`
+
+- Runs the app in the development mode [http://localhost:5173/]
+
+### `yarn build` or `npm run build`
+
+- build for production
+
+### `yarn preview` or `npm run preview`
+
+- locally preview production build

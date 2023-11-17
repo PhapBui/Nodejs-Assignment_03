@@ -10,16 +10,16 @@ import {
 import { icons } from "@/assets/icons";
 
 const sidebarViewData = [
-  {
-    title: "Service",
-    items: [
-      {
-        title: "Live Chat",
-        icons: icons.chat,
-        path: "/service/chat",
-      },
-    ],
-  },
+  // {
+  //   title: "Service",
+  //   items: [
+  //     {
+  //       title: "Live Chat",
+  //       icons: icons.chat,
+  //       path: "/service/chat",
+  //     },
+  //   ],
+  // },
   {
     title: "List",
     items: [

@@ -66,7 +66,11 @@ app.use(
   CartRouter,
   OrderRouter
 );
-
+app.get("/", (req, res, next) => {
+  return res
+    .status(200)
+    .json({ status: 1, message: "Please reading readme.md for more details" });
+});
 // handler errors
 app.use((error, req, res, next) => {
   console.log(error);
